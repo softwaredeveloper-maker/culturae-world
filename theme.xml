@@ -1,0 +1,1354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <b:if cond='data:view.isHomepage'>
+    <title><data:blog.pageTitle/></title>
+  <b:else/>
+    <title><data:blog.pageName/> | <data:blog.title/></title>
+  </b:if>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' name='description'/>
+  </b:if>
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+
+  <b:skin><![CDATA[/*
+-----------------------------------------------
+Heritage Magazine — a Blogger theme styled after
+magazine/news portals (reference: punarjjanibharat.com)
+-----------------------------------------------
+<Group description="Theme Colors" selector="body">
+  <Variable name="primary.color" description="Accent color (saffron)" type="color" default="#e07b1a" value="#e07b1a"/>
+  <Variable name="secondary.color" description="Secondary color (brown)" type="color" default="#79603c" value="#79603c"/>
+  <Variable name="dark.color" description="Footer / dark bands" type="color" default="#04122b" value="#04122b"/>
+  <Variable name="page.background" description="Page background" type="color" default="#f8fafc" value="#f8fafc"/>
+</Group>
+*/
+
+/* ============================================================
+   Heritage Magazine — Blogger theme styled after punarjjanibharat.com
+   Fonts: Playfair Display (display), Lora (serif), Inter (UI)
+   Palette: saffron #e07b1a · brown #79603c · navy #04122b
+   ============================================================ */
+
+:root {
+  --pb-primary: #e07b1a;
+  --pb-primary-soft: #ffedd5;
+  --pb-secondary: #79603c;
+  --pb-secondary-deep: #5f4b2f;
+  --pb-dark: #04122b;
+  --pb-darker: #031020;
+  --pb-bg: #f8fafc;
+  --pb-line: #eef2f7;
+  --pb-ink: #1c1917;
+  --pb-muted: #57534e;
+  --pb-faint: #cbd5e1;
+  --pb-card-shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 6px 18px rgba(0, 0, 0, .05);
+  --pb-card-shadow-hover: 0 4px 10px rgba(0, 0, 0, .08), 0 14px 30px rgba(0, 0, 0, .10);
+  --pb-display: 'Playfair Display', Georgia, serif;
+  --pb-serif: 'Lora', Georgia, serif;
+  --pb-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pb-radius: 12px;
+  --pb-maxw: 1240px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--pb-bg);
+  color: var(--pb-ink);
+  font-family: var(--pb-serif);
+  font-size: 16px;
+  line-height: 1.6;
+}
+img { max-width: 100%; border: 0; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--pb-primary); }
+
+.pb-wrap { max-width: var(--pb-maxw); margin: 0 auto; padding: 0 20px; }
+
+/* visibility helpers driven by body classes set in the template */
+.pb-home-only { display: none; }
+body.pb-is-home .pb-home-only { display: block; }
+body.pb-is-home .pb-hide-on-home { display: none; }
+
+/* ---------------- header ---------------- */
+.pb-header {
+  position: sticky; top: 0; z-index: 60;
+  background: #fff;
+  border-bottom: 1px solid var(--pb-line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+.pb-header-inner {
+  display: flex; align-items: center; gap: 20px;
+  min-height: 74px; padding: 8px 20px;
+  max-width: var(--pb-maxw); margin: 0 auto;
+}
+.pb-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.pb-brand img { height: 52px; width: auto; object-fit: contain; }
+.pb-brand-title {
+  font-family: var(--pb-display); font-weight: 800; font-size: 26px;
+  color: var(--pb-secondary-deep); letter-spacing: .5px; line-height: 1.1;
+}
+.pb-brand-title .accent { color: var(--pb-primary); }
+.pb-brand-tagline {
+  display: block; font-family: var(--pb-sans); font-weight: 500;
+  font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase;
+  color: var(--pb-muted); margin-top: 2px;
+}
+.pb-nav { margin-left: auto; }
+.pb-nav ul { display: flex; align-items: center; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.pb-nav a {
+  font-family: var(--pb-sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase; color: #33302c;
+  padding: 8px 0; border-bottom: 2px solid transparent;
+}
+.pb-nav a:hover { color: var(--pb-primary); border-bottom-color: var(--pb-primary); }
+.pb-search { display: flex; align-items: center; }
+.pb-search form { display: flex; align-items: center; background: var(--pb-bg); border: 1px solid var(--pb-line); border-radius: 999px; padding: 4px 6px 4px 16px; }
+.pb-search input {
+  border: 0; background: transparent; outline: none; width: 170px;
+  font-family: var(--pb-sans); font-size: 13px; color: var(--pb-ink);
+}
+.pb-search button {
+  border: 0; background: var(--pb-primary); color: #fff; cursor: pointer;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.pb-search button svg { width: 14px; height: 14px; }
+.pb-menu-btn {
+  display: none; margin-left: auto; border: 1px solid var(--pb-line);
+  background: #fff; border-radius: 8px; padding: 8px 10px; cursor: pointer; color: var(--pb-ink);
+}
+.pb-menu-btn svg { width: 20px; height: 20px; display: block; }
+
+@media (max-width: 980px) {
+  .pb-nav {
+    display: none; position: absolute; left: 0; right: 0; top: 100%;
+    background: #fff; border-bottom: 1px solid var(--pb-line);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, .08); padding: 10px 20px 16px;
+  }
+  .pb-nav.open { display: block; }
+  .pb-nav ul { flex-direction: column; align-items: stretch; gap: 0; }
+  .pb-nav a { display: block; padding: 12px 4px; border-bottom: 1px solid var(--pb-line); }
+  .pb-menu-btn { display: block; }
+  .pb-search { margin-left: auto; }
+  .pb-menu-btn { margin-left: 0; }
+}
+@media (max-width: 560px) {
+  .pb-search input { width: 90px; }
+  .pb-brand img { height: 42px; }
+  .pb-brand-title { font-size: 21px; }
+}
+
+/* ---------------- hero carousel ---------------- */
+.pb-hero { margin: 22px auto 8px; max-width: var(--pb-maxw); padding: 0 20px; }
+.pb-hero-frame {
+  position: relative; border-radius: 16px; overflow: hidden;
+  background: var(--pb-dark); aspect-ratio: 16 / 6.2; min-height: 220px;
+}
+.pb-hero-slide {
+  position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease;
+  pointer-events: none; display: block;
+}
+.pb-hero-slide.active { opacity: 1; pointer-events: auto; }
+.pb-hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pb-hero-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 90px 34px 30px;
+  background: linear-gradient(to top, rgba(3, 16, 32, .88), rgba(3, 16, 32, 0));
+  color: #fff;
+}
+.pb-hero-caption .chip {
+  display: inline-block; background: var(--pb-primary); color: #fff;
+  font-family: var(--pb-sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 999px; margin-bottom: 10px;
+}
+.pb-hero-caption h3 {
+  margin: 0; font-family: var(--pb-display); font-weight: 700;
+  font-size: clamp(18px, 2.6vw, 30px); line-height: 1.25; max-width: 850px;
+}
+.pb-hero-dots {
+  position: absolute; bottom: 12px; right: 22px; display: flex; gap: 8px; z-index: 5;
+}
+.pb-hero-dots button {
+  width: 9px; height: 9px; border-radius: 50%; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .45); padding: 0;
+}
+.pb-hero-dots button.active { background: var(--pb-primary); width: 22px; border-radius: 999px; }
+@media (max-width: 700px) {
+  .pb-hero-frame { aspect-ratio: 16 / 10; }
+  .pb-hero-caption { padding: 60px 18px 18px; }
+}
+
+/* ---------------- section shell ---------------- */
+.pb-section { padding: 26px 0 6px; }
+.pb-section-head {
+  display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px;
+}
+.pb-section-head h2 {
+  margin: 0; font-family: var(--pb-display); font-weight: 800;
+  font-size: 21px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--pb-ink); position: relative; padding-left: 16px; flex-shrink: 0;
+}
+.pb-section-head h2::before {
+  content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+  width: 5px; border-radius: 3px; background: var(--pb-primary);
+}
+.pb-section-head .rule { flex: 1; height: 1px; background: var(--pb-line); }
+.pb-section-head .more {
+  font-family: var(--pb-sans); font-size: 13px; font-weight: 700;
+  color: var(--pb-primary); white-space: nowrap;
+}
+.pb-section-head .more:hover { color: var(--pb-secondary); }
+
+/* dark variant (videos) */
+.pb-section.dark .pb-section-head h2 { color: #fff; }
+.pb-section.dark .pb-section-head .rule { background: rgba(255, 255, 255, .15); }
+
+/* ---------------- post cards ---------------- */
+.pb-grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+@media (max-width: 1100px) { .pb-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 900px)  { .pb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px)  { .pb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+
+.pb-card {
+  background: #fff; border-radius: var(--pb-radius); overflow: hidden;
+  box-shadow: var(--pb-card-shadow); display: flex; flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease; position: relative;
+}
+.pb-card:hover { transform: translateY(-3px); box-shadow: var(--pb-card-shadow-hover); }
+.pb-card-img { display: block; aspect-ratio: 16 / 10; background: var(--pb-line); overflow: hidden; }
+.pb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.pb-card:hover .pb-card-img img { transform: scale(1.04); }
+.pb-card-body { padding: 12px 14px 10px; display: flex; flex-direction: column; flex: 1; }
+.pb-card-title {
+  margin: 0 0 6px; font-family: var(--pb-serif); font-weight: 700;
+  font-size: 15px; line-height: 1.35; color: var(--pb-ink);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pb-card:hover .pb-card-title { color: var(--pb-primary); }
+.pb-card-excerpt {
+  margin: 0; font-family: var(--pb-sans); font-size: 12.5px; line-height: 1.5;
+  color: var(--pb-muted);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pb-card-meta {
+  margin-top: auto; padding-top: 10px; display: flex; align-items: center; gap: 8px;
+  border-top: 1px solid var(--pb-line); margin-top: 12px; padding-top: 9px; padding-bottom: 2px;
+}
+.pb-avatar {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: var(--pb-secondary); color: #fff;
+  font-family: var(--pb-sans); font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; text-transform: uppercase;
+}
+.pb-card-meta .who {
+  font-family: var(--pb-sans); font-size: 11.5px; font-weight: 600; color: var(--pb-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pb-card-meta .read {
+  margin-left: auto; font-family: var(--pb-sans); font-size: 11.5px; font-weight: 700;
+  color: var(--pb-primary); white-space: nowrap;
+}
+.pb-card .pb-link-cover { position: absolute; inset: 0; z-index: 2; }
+.pb-card .pb-card-meta, .pb-card .pb-link-under { position: relative; z-index: 3; }
+
+/* ---------------- quote banner ---------------- */
+.pb-quote { margin: 34px 0 10px; }
+.pb-quote-inner {
+  background: linear-gradient(120deg, var(--pb-darker), var(--pb-dark) 55%, #123);
+  border-radius: 16px; color: #fff; overflow: hidden;
+  display: flex; align-items: center; gap: 34px; padding: 34px 40px;
+}
+.pb-quote-inner img {
+  width: 150px; height: 150px; object-fit: cover; border-radius: 50%;
+  border: 3px solid var(--pb-primary); flex-shrink: 0; background: #223;
+}
+.pb-quote-text blockquote {
+  margin: 0; font-family: var(--pb-display); font-weight: 700;
+  font-size: clamp(20px, 3vw, 32px); line-height: 1.3; letter-spacing: 1px;
+}
+.pb-quote-text blockquote::before { content: '\201C'; color: var(--pb-primary); }
+.pb-quote-text blockquote::after { content: '\201D'; color: var(--pb-primary); }
+.pb-quote-text .name {
+  margin-top: 14px; font-family: var(--pb-sans); font-weight: 700;
+  letter-spacing: 2.5px; font-size: 14px; color: var(--pb-primary); text-transform: uppercase;
+}
+.pb-quote-text .role { font-family: var(--pb-sans); font-size: 12.5px; color: var(--pb-faint); letter-spacing: 1px; margin-top: 3px; }
+@media (max-width: 640px) {
+  .pb-quote-inner { flex-direction: column; text-align: center; padding: 28px 22px; }
+}
+
+/* ---------------- video section ---------------- */
+.pb-videos-band { background: var(--pb-darker); margin-top: 34px; padding: 8px 0 34px; }
+.pb-video-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .pb-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pb-video-grid { grid-template-columns: 1fr; } }
+.pb-video {
+  position: relative; border-radius: var(--pb-radius); overflow: hidden;
+  background: #000; aspect-ratio: 16 / 9; cursor: pointer; border: 0; padding: 0; display: block; width: 100%;
+}
+.pb-video img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .2s, transform .3s; }
+.pb-video:hover img { opacity: 1; transform: scale(1.03); }
+.pb-video .play {
+  position: absolute; inset: 0; margin: auto; width: 54px; height: 54px;
+  background: rgba(224, 123, 26, .92); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+.pb-video .play svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
+.pb-video .vtitle {
+  position: absolute; left: 0; right: 0; bottom: 0; text-align: left;
+  padding: 40px 14px 12px; color: #fff; font-family: var(--pb-sans);
+  font-size: 12.5px; font-weight: 600; line-height: 1.4;
+  background: linear-gradient(to top, rgba(0, 0, 0, .85), transparent);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pb-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---------------- footer ---------------- */
+.pb-footer { background: var(--pb-dark); color: #d7dee8; margin-top: 0; }
+.pb-footer-grid {
+  display: grid; gap: 36px; grid-template-columns: 1.4fr 1fr 1.2fr 1.3fr;
+  padding: 46px 0 30px;
+}
+@media (max-width: 900px) { .pb-footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .pb-footer-grid { grid-template-columns: 1fr; gap: 26px; } }
+.pb-footer h4 {
+  margin: 0 0 16px; font-family: var(--pb-display); font-size: 17px;
+  font-weight: 700; color: #fff; letter-spacing: 1px;
+}
+.pb-footer-brand .pb-brand-title { color: #fff; font-size: 24px; }
+.pb-footer-about { font-family: var(--pb-sans); font-size: 13px; line-height: 1.7; color: var(--pb-faint); margin: 12px 0 18px; }
+.pb-social { display: flex; flex-wrap: wrap; gap: 10px; }
+.pb-social a {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .25);
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  transition: background .2s, border-color .2s;
+}
+.pb-social a:hover { background: var(--pb-primary); border-color: var(--pb-primary); color: #fff; }
+.pb-social svg { width: 16px; height: 16px; fill: currentColor; }
+.pb-footer ul { list-style: none; margin: 0; padding: 0; }
+.pb-footer ul li { margin-bottom: 10px; }
+.pb-footer ul a, .pb-footer-contact a {
+  font-family: var(--pb-sans); font-size: 13.5px; color: var(--pb-faint);
+}
+.pb-footer ul a:hover, .pb-footer-contact a:hover { color: var(--pb-primary); }
+.pb-footer .widget ul { list-style: none; margin: 0; padding: 0; }
+.pb-footer-contact p {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 12px;
+  font-family: var(--pb-sans); font-size: 13.5px; color: var(--pb-faint);
+}
+.pb-footer-contact svg { width: 15px; height: 15px; fill: var(--pb-primary); flex-shrink: 0; }
+.pb-subscribe-form { display: flex; border-radius: 999px; overflow: hidden; background: #fff; padding: 4px; }
+.pb-subscribe-form input {
+  flex: 1; border: 0; outline: none; padding: 8px 16px; min-width: 0;
+  font-family: var(--pb-sans); font-size: 13px; color: var(--pb-ink); background: transparent;
+}
+.pb-subscribe-form button {
+  border: 0; background: var(--pb-primary); color: #fff; cursor: pointer;
+  font-family: var(--pb-sans); font-size: 13px; font-weight: 700;
+  padding: 8px 20px; border-radius: 999px;
+}
+.pb-subscribe-form button:hover { background: var(--pb-secondary); }
+.pb-footer-note { font-family: var(--pb-sans); font-size: 12px; color: #8fa0b5; margin-top: 10px; }
+.pb-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  padding: 18px 0; text-align: center;
+  font-family: var(--pb-sans); font-size: 12.5px; color: #8fa0b5;
+}
+.pb-footer-bottom a { color: var(--pb-primary); }
+
+/* ---------------- article (item) page ---------------- */
+.pb-article { max-width: 780px; margin: 30px auto 40px; padding: 0 20px; }
+.pb-article-card { background: #fff; border-radius: 16px; box-shadow: var(--pb-card-shadow); padding: clamp(20px, 4vw, 44px); }
+.pb-article h1.pb-article-title {
+  margin: 0 0 14px; font-family: var(--pb-display); font-weight: 800;
+  font-size: clamp(24px, 4vw, 36px); line-height: 1.22; color: var(--pb-ink);
+}
+.pb-article-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  font-family: var(--pb-sans); font-size: 13px; color: var(--pb-muted);
+  padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--pb-line);
+}
+.pb-article-meta .dot { opacity: .5; }
+.pb-label-chip {
+  display: inline-block; background: var(--pb-primary-soft); color: var(--pb-secondary-deep);
+  font-family: var(--pb-sans); font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+}
+.pb-label-chip:hover { background: var(--pb-primary); color: #fff; }
+.pb-post-body { font-size: 17px; line-height: 1.85; color: #292524; }
+.pb-post-body img { border-radius: 10px; height: auto; }
+.pb-post-body a { color: var(--pb-primary); text-decoration: underline; }
+.pb-post-body h2, .pb-post-body h3 { font-family: var(--pb-display); line-height: 1.3; margin: 1.4em 0 .5em; }
+.pb-post-body blockquote {
+  margin: 1.4em 0; padding: 12px 22px; border-left: 4px solid var(--pb-primary);
+  background: var(--pb-bg); border-radius: 0 10px 10px 0; font-style: italic;
+}
+.pb-share { display: flex; align-items: center; gap: 10px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--pb-line); flex-wrap: wrap; }
+.pb-share span { font-family: var(--pb-sans); font-size: 13px; font-weight: 700; color: var(--pb-muted); letter-spacing: 1px; text-transform: uppercase; }
+.pb-share a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--pb-sans); font-size: 12.5px; font-weight: 600;
+  border: 1px solid var(--pb-line); border-radius: 999px; padding: 6px 14px; color: var(--pb-muted);
+}
+.pb-share a:hover { border-color: var(--pb-primary); color: var(--pb-primary); }
+.pb-share svg { width: 14px; height: 14px; fill: currentColor; }
+.pb-pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+.pb-pager a {
+  font-family: var(--pb-sans); font-size: 13px; font-weight: 700; color: var(--pb-secondary);
+  background: #fff; border: 1px solid var(--pb-line); border-radius: 999px; padding: 9px 20px;
+}
+.pb-pager a:hover { color: #fff; background: var(--pb-primary); border-color: var(--pb-primary); }
+
+/* comments */
+.pb-comments { margin-top: 30px; }
+.pb-comments h3 { font-family: var(--pb-display); font-size: 20px; margin: 0 0 16px; }
+.pb-comment { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--pb-line); }
+.pb-comment .pb-avatar { width: 34px; height: 34px; font-size: 13px; }
+.pb-comment .c-author { font-family: var(--pb-sans); font-weight: 700; font-size: 13.5px; }
+.pb-comment .c-date { font-family: var(--pb-sans); font-size: 11.5px; color: var(--pb-muted); margin-left: 8px; }
+.pb-comment .c-body { font-size: 14.5px; margin-top: 4px; line-height: 1.6; }
+.pb-comment-cta {
+  display: inline-block; margin-top: 18px; font-family: var(--pb-sans); font-weight: 700; font-size: 13.5px;
+  background: var(--pb-primary); color: #fff !important; border-radius: 999px; padding: 10px 24px;
+}
+.pb-comment-cta:hover { background: var(--pb-secondary); }
+
+/* ---------------- index / label / search pages ---------------- */
+.pb-index { padding: 28px 0 40px; }
+.pb-index-title {
+  font-family: var(--pb-display); font-size: 26px; font-weight: 800; margin: 0 0 22px;
+  padding-left: 16px; position: relative;
+}
+.pb-index-title::before {
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 5px; border-radius: 3px; background: var(--pb-primary);
+}
+.pb-index-title small { display: block; font-family: var(--pb-sans); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--pb-muted); margin-bottom: 4px; }
+.pb-status-msg {
+  background: #fff; border: 1px dashed var(--pb-faint); border-radius: var(--pb-radius);
+  padding: 40px; text-align: center; font-family: var(--pb-sans); color: var(--pb-muted);
+}
+
+/* skeleton shimmer for JS sections */
+.pb-skeleton { border-radius: var(--pb-radius); background: linear-gradient(90deg, #eef2f7 25%, #f8fafc 50%, #eef2f7 75%); background-size: 200% 100%; animation: pbsh 1.2s infinite; aspect-ratio: 16/13; }
+@keyframes pbsh { to { background-position: -200% 0; } }
+
+/* misc blogger bits */
+.blog-admin, .quickedit { display: none; }
+#navbar, .navbar { display: none !important; }
+
+
+/* Blogger theme-designer overrides (edit colors in Theme > Customize) */
+:root {
+  --pb-primary: $(primary.color);
+  --pb-secondary: $(secondary.color);
+  --pb-dark: $(dark.color);
+  --pb-bg: $(page.background);
+}
+]]></b:skin>
+
+  <script>//<![CDATA[
+window.PB_ON_BLOGGER = true;
+/* ================= EDIT ME: SITE CONFIG =================
+   Everything site-specific lives in this one block.
+   Labels below must EXACTLY match the labels you put on posts. */
+window.PB_CONFIG = {
+
+  /* Hero carousel: shows the 3 latest posts with this label
+     (falls back to the 3 newest posts if the label is unused). */
+  heroLabel: 'Featured',
+
+  /* Homepage sections: one row of 5 cards per entry.
+     "label" = Blogger post label to pull; "url" = the More link. */
+  sections: [
+    { title: 'Updates',          label: 'News' },
+    { title: 'Events',           label: 'Events' },
+    { title: 'Obituaries',       label: 'Obituaries' },
+    { title: 'Books & Literature', label: 'Books' },
+    { title: 'Awards & Honours', label: 'Awards' }
+  ],
+
+  /* Quote banner on the homepage. Set text:'' to hide it. */
+  quote: {
+    image: '',                      /* paste an image URL, or leave '' */
+    text:  'Art is the bridge between the soul and the world',
+    name:  'Your Featured Voice',
+    role:  'Edit this in the theme HTML (PB_CONFIG)'
+  },
+
+  /* YouTube section: add {id:'VIDEOID', title:'...'} entries.
+     The ID is the part after v= in a YouTube URL.
+     Leave the list empty [] to hide the whole section. */
+  videos: [],
+
+  /* Footer */
+  footer: {
+    title: '',                      /* '' = use the blog title */
+    about: 'Stories, events and voices from the world of arts and culture. Edit this in /admin on the main site, or here in PB_CONFIG.',
+    social: [
+      { type: 'instagram', url: '#' },
+      { type: 'youtube',   url: '#' },
+      { type: 'facebook',  url: '#' },
+      { type: 'x',         url: '#' }
+    ],
+    contact: {
+      email: 'info@culturae.world',
+      phone: '+91 00000 00000',
+      whatsapp: '',                 /* e.g. '919876543210' to show a WhatsApp link */
+      address: ''
+    },
+    /* Newsletter box: point "action" at a Google Form / Mailchimp URL.
+       Leave action:'' to hide the box. */
+    newsletter: {
+      title: 'Subscribe to our updates',
+      action: '',
+      field: 'email',
+      note: ''
+    }
+  }
+};
+/* =============== END OF SITE CONFIG =============== */
+//]]></script>
+</head>
+
+<body>
+  <b:class cond='data:view.isHomepage' name='pb-is-home'/>
+  <b:class cond='data:view.isSingleItem' name='pb-is-item'/>
+
+  <!-- ================= HEADER ================= -->
+  <header class='pb-header'>
+    <div class='pb-header-inner'>
+      <b:section class='pb-brand-slot' id='header' maxwidgets='1' name='Header' showaddelement='no'>
+        <b:widget id='Header1' locked='true' title='(Header)' type='Header' version='1'>
+          <b:includable id='main'>
+            <a class='pb-brand' expr:href='data:blog.homepageUrl'>
+              <b:if cond='data:useImage'>
+                <img expr:alt='data:title' expr:src='data:sourceUrl'/>
+              <b:else/>
+                <span>
+                  <span class='pb-brand-title'><data:title/></span>
+                  <b:if cond='data:description'>
+                    <span class='pb-brand-tagline'><data:description/></span>
+                  </b:if>
+                </span>
+              </b:if>
+            </a>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <nav class='pb-nav' id='pb-nav'>
+        <b:section class='pb-nav-slot' id='nav' maxwidgets='1' name='Main Menu' showaddelement='no'>
+          <b:widget id='LinkList1' locked='true' title='Menu' type='LinkList' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-0'>Home</b:widget-setting>
+              <b:widget-setting name='link-0'>/</b:widget-setting>
+              <b:widget-setting name='text-1'>News</b:widget-setting>
+              <b:widget-setting name='link-1'>/search/label/News</b:widget-setting>
+              <b:widget-setting name='text-2'>Featured</b:widget-setting>
+              <b:widget-setting name='link-2'>/search/label/Featured</b:widget-setting>
+              <b:widget-setting name='text-3'>Events</b:widget-setting>
+              <b:widget-setting name='link-3'>/search/label/Events</b:widget-setting>
+              <b:widget-setting name='text-4'>Contact Us</b:widget-setting>
+              <b:widget-setting name='link-4'>/p/contact.html</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <ul>
+                <b:loop values='data:links' var='link'>
+                  <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                </b:loop>
+              </ul>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </nav>
+
+      <div class='pb-search'>
+        <form expr:action='data:blog.homepageUrl + "search"' method='get' role='search'>
+          <input aria-label='Search this site' name='q' placeholder='Search here' type='search'/>
+          <button aria-label='Search' type='submit'>
+            <svg fill='none' stroke='currentColor' stroke-width='2.4' viewBox='0 0 24 24'><circle cx='11' cy='11' r='7'/><path d='M21 21l-4.3-4.3'/></svg>
+          </button>
+        </form>
+      </div>
+
+      <button aria-label='Open menu' class='pb-menu-btn' id='pb-menu-btn' type='button'>
+        <svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M4 6h16M4 12h16M4 18h16'/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HOMEPAGE: HERO ================= -->
+  <div class='pb-hero pb-home-only'>
+    <div class='pb-hero-frame' id='pb-hero-frame'>
+      <div class='pb-skeleton' style='position:absolute; inset:0; border-radius:0;'></div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN (Blog posts) ================= -->
+  <main>
+    <b:section class='pb-main' id='main' maxwidgets='1' name='Blog Posts' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+        <b:includable id='main' var='top'>
+
+          <b:if cond='data:view.isError'>
+            <div class='pb-wrap pb-index'>
+              <div class='pb-status-msg'>
+                <h2>Page not found</h2>
+                <p>The page you were looking for does not exist.</p>
+                <a class='pb-comment-cta' expr:href='data:blog.homepageUrl'>Back to Home</a>
+              </div>
+            </div>
+
+          <b:elseif cond='data:view.isSingleItem'/>
+            <!-- ======== single post / static page ======== -->
+            <b:loop values='data:posts' var='post'>
+              <article class='pb-article'>
+                <div class='pb-article-card'>
+                  <b:if cond='data:post.labels'>
+                    <div style='margin-bottom:12px;'>
+                      <b:loop values='data:post.labels' var='label'>
+                        <a class='pb-label-chip' expr:href='data:label.url'><data:label.name/></a>
+                      </b:loop>
+                    </div>
+                  </b:if>
+                  <h1 class='pb-article-title'><data:post.title/></h1>
+                  <div class='pb-article-meta'>
+                    <span class='pb-avatar' expr:data-name='data:post.author'></span>
+                    <span><data:post.author/></span>
+                    <span class='dot'>&#8226;</span>
+                    <span><data:post.timestamp/></span>
+                  </div>
+                  <div class='pb-post-body'>
+                    <data:post.body/>
+                  </div>
+                  <b:if cond='data:view.isPost'>
+                    <div class='pb-share'>
+                      <span>Share</span>
+                      <a expr:href='"https://api.whatsapp.com/send?text=" + data:post.url' rel='noopener' target='_blank'>WhatsApp</a>
+                      <a expr:href='"https://www.facebook.com/sharer/sharer.php?u=" + data:post.url' rel='noopener' target='_blank'>Facebook</a>
+                      <a expr:href='"https://twitter.com/intent/tweet?url=" + data:post.url' rel='noopener' target='_blank'>X</a>
+                    </div>
+                  </b:if>
+                </div>
+
+                <b:if cond='data:view.isPost'>
+                  <div class='pb-pager'>
+                    <b:if cond='data:newerPageUrl'>
+                      <a expr:href='data:newerPageUrl'>&#8592; Newer Post</a>
+                    <b:else/>
+                      <span></span>
+                    </b:if>
+                    <b:if cond='data:olderPageUrl'>
+                      <a expr:href='data:olderPageUrl'>Older Post &#8594;</a>
+                    </b:if>
+                  </div>
+
+                  <div class='pb-comments'>
+                    <div class='pb-article-card'>
+                      <h3>Comments</h3>
+                      <b:loop values='data:post.comments' var='comment'>
+                        <div class='pb-comment'>
+                          <span class='pb-avatar' expr:data-name='data:comment.author'></span>
+                          <div>
+                            <span class='c-author'><data:comment.author/></span>
+                            <span class='c-date'><data:comment.timestamp/></span>
+                            <div class='c-body'><data:comment.body/></div>
+                          </div>
+                        </div>
+                      </b:loop>
+                      <b:if cond='data:post.allowNewComments'>
+                        <a class='pb-comment-cta' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>Post a Comment</a>
+                      </b:if>
+                    </div>
+                  </div>
+                </b:if>
+              </article>
+            </b:loop>
+
+          <b:else/>
+            <!-- ======== index / label / search / archive ======== -->
+            <div class='pb-wrap pb-index'>
+              <b:if cond='data:view.isHomepage'>
+                <div class='pb-section-head'>
+                  <h2>Recent Articles</h2>
+                  <span class='rule'></span>
+                </div>
+              <b:else/>
+                <h1 class='pb-index-title'>
+                  <b:if cond='data:view.search.label'>
+                    <small>Category</small><data:view.search.label/>
+                  <b:elseif cond='data:view.search.query'/>
+                    <small>Search results for</small>&#8220;<data:view.search.query/>&#8221;
+                  <b:else/>
+                    <small>Browsing</small><data:blog.pageName/>
+                  </b:if>
+                </h1>
+              </b:if>
+
+              <div class='pb-grid'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='pb-card'>
+                    <a class='pb-link-cover' expr:href='data:post.url'></a>
+                    <span class='pb-card-img'>
+                      <img alt='' class='pb-thumb' expr:data-pbthumb='data:post.thumbnailUrl' expr:src='data:post.thumbnailUrl'/>
+                    </span>
+                    <span class='pb-card-body'>
+                      <span class='pb-card-title'><data:post.title/></span>
+                      <span class='pb-card-excerpt'><data:post.snippet/></span>
+                      <span class='pb-card-meta'>
+                        <span class='pb-avatar' expr:data-name='data:post.author'></span>
+                        <span class='who'><data:post.author/></span>
+                        <span class='read'>Read More</span>
+                      </span>
+                    </span>
+                  </article>
+                </b:loop>
+              </div>
+
+              <div class='pb-pager'>
+                <b:if cond='data:newerPageUrl'>
+                  <a expr:href='data:newerPageUrl'>&#8592; Newer Posts</a>
+                <b:else/>
+                  <span></span>
+                </b:if>
+                <b:if cond='data:olderPageUrl'>
+                  <a expr:href='data:olderPageUrl'>Older Posts &#8594;</a>
+                </b:if>
+              </div>
+            </div>
+          </b:if>
+
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </main>
+
+  <!-- ================= HOMEPAGE: label sections (JS) ================= -->
+  <div class='pb-home-only' id='pb-sections'></div>
+
+  <!-- ================= HOMEPAGE: quote banner ================= -->
+  <div class='pb-quote pb-home-only' id='pb-quote'></div>
+
+  <!-- ================= HOMEPAGE: YouTube ================= -->
+  <div class='pb-videos-band pb-home-only' id='pb-videos'>
+    <div class='pb-wrap'>
+      <section class='pb-section dark'>
+        <div class='pb-section-head'>
+          <h2>YouTube Videos</h2>
+          <span class='rule'></span>
+        </div>
+        <div class='pb-video-grid'></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class='pb-footer'>
+    <div class='pb-wrap'>
+      <div class='pb-footer-grid'>
+        <div class='pb-footer-brand' id='pb-footer-about'></div>
+        <div class='pb-footer-links'>
+          <h4>Quick Links</h4>
+          <b:section class='pb-footer-links-slot' id='footerlinks' maxwidgets='2' name='Footer Links' showaddelement='yes'>
+            <b:widget id='LinkList2' locked='false' title='Quick Links' type='LinkList' version='1'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                <b:widget-setting name='text-0'>Home</b:widget-setting>
+                <b:widget-setting name='link-0'>/</b:widget-setting>
+                <b:widget-setting name='text-1'>News</b:widget-setting>
+                <b:widget-setting name='link-1'>/search/label/News</b:widget-setting>
+                <b:widget-setting name='text-2'>Featured</b:widget-setting>
+                <b:widget-setting name='link-2'>/search/label/Featured</b:widget-setting>
+                <b:widget-setting name='text-3'>Events</b:widget-setting>
+                <b:widget-setting name='link-3'>/search/label/Events</b:widget-setting>
+                <b:widget-setting name='text-4'>Contact Us</b:widget-setting>
+                <b:widget-setting name='link-4'>/p/contact.html</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <ul>
+                  <b:loop values='data:links' var='link'>
+                    <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                  </b:loop>
+                </ul>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <div class='pb-footer-contact' id='pb-footer-contact'></div>
+        </div>
+        <div id='pb-footer-subscribe'></div>
+      </div>
+    </div>
+    <div class='pb-footer-bottom'>
+      &#169; <span id='pb-year'></span> <data:blog.title/> &#8212; All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>//<![CDATA[
+/* ============================================================
+   Heritage Magazine — site engine
+   Used in TWO places with the same file:
+     1. Inside the Blogger theme (theme.xml) — window.PB_ON_BLOGGER=true,
+        feeds are fetched same-origin (/feeds/posts/default...).
+     2. On the static Vercel site (site/) — PB_CONFIG.blogUrl points at the
+        Blogger blog and feeds are fetched via JSONP (works cross-origin).
+        If blogUrl is empty, built-in DEMO content is shown instead.
+   Reads window.PB_CONFIG (defined in theme <head> or site/config.js).
+   ============================================================ */
+(function () {
+  'use strict';
+  var CFG = window.PB_CONFIG || {};
+
+  /* ---------- tiny helpers ---------- */
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html !== undefined) n.innerHTML = html;
+    return n;
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function initials(name) {
+    var p = String(name || '?').trim().split(/\s+/);
+    return (p[0] ? p[0][0] : '?') + (p[1] ? p[1][0] : '');
+  }
+  var AVATAR_COLORS = ['#79603c', '#e07b1a', '#1a2c8c', '#5f4b2f', '#0f766e'];
+  function avatarColor(name) {
+    var h = 0, s = String(name || '');
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    return AVATAR_COLORS[h % AVATAR_COLORS.length];
+  }
+  function fmtDate(iso) {
+    try {
+      var d = new Date(iso);
+      return d.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) { return ''; }
+  }
+  function decodeEntities(s) {
+    var ta = document.createElement('textarea');
+    ta.innerHTML = s;
+    return ta.value;
+  }
+  /* Only allow URLs that cannot smuggle script (config values travel through
+     the public SITE-CONFIG page, so schemes are validated at every sink). */
+  function safeUrl(u) {
+    u = String(u == null ? '' : u).trim();
+    if (!u) return '';
+    if (/^(https?:)?\/\//i.test(u)) return u;
+    if (u.charAt(0) === '/' || u.charAt(0) === '#') return u;
+    if (/^(mailto|tel):/i.test(u)) return u;
+    return '';
+  }
+  function safeImg(u) {
+    u = String(u == null ? '' : u).trim();
+    if (/^data:image\//i.test(u)) return u;
+    return safeUrl(u);
+  }
+  function blogBase() {
+    var u = CFG.blogUrl || '';
+    if (u && u.charAt(u.length - 1) !== '/') u += '/';
+    return u;
+  }
+
+  /* ---------- remote config (the admin page saves here) ----------
+     A Blogger PAGE titled SITE-CONFIG holds a JSON block. If present, it
+     overrides the local defaults — so edits made in /admin go live on both
+     the Vercel site and the Blogger blog without any redeploy. */
+  function isPlainObj(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
+  function mergeCfg(base, over) {
+    var out = {}, k;
+    for (k in base) { if (Object.prototype.hasOwnProperty.call(base, k)) out[k] = base[k]; }
+    for (k in over) {
+      if (!Object.prototype.hasOwnProperty.call(over, k)) continue;
+      out[k] = (isPlainObj(out[k]) && isPlainObj(over[k])) ? mergeCfg(out[k], over[k]) : over[k];
+    }
+    return out;
+  }
+  function extractConfigJson(html) {
+    /* DOMParser produces an inert document: no scripts run, no images load,
+       no event handlers fire — unlike innerHTML on a live element. */
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var pre = doc.querySelector('#pb-site-config');
+    var txt = (pre ? pre.textContent : doc.body.textContent) || '';
+    var start = txt.indexOf('{'), end = txt.lastIndexOf('}');
+    if (start < 0 || end <= start) return null;
+    return JSON.parse(txt.slice(start, end + 1));
+  }
+  function applyRemoteConfig(data) {
+    try {
+      var entries = (data && data.feed && data.feed.entry) || [];
+      for (var i = 0; i < entries.length; i++) {
+        var title = ((entries[i].title && entries[i].title.$t) || '').trim().toUpperCase();
+        if (title !== 'SITE-CONFIG') continue;
+        var remote = extractConfigJson((entries[i].content && entries[i].content.$t) || '');
+        if (remote) {
+          /* never let the remote page rewire where config is loaded from,
+             and never accept raw HTML fields from it */
+          delete remote.blogUrl;
+          delete remote.admin;
+          if (remote.brand) delete remote.brand.titleHtml;
+          CFG = mergeCfg(CFG, remote);
+          window.PB_CONFIG = CFG;
+        }
+        return;
+      }
+    } catch (e) {
+      if (window.console) console.warn('SITE-CONFIG could not be parsed:', e);
+    }
+  }
+  function loadRemoteConfig(done) {
+    var base = blogBase();
+    if (window.PB_MOCK || (!base && !window.PB_ON_BLOGGER)) { done(); return; }
+    var path = 'feeds/pages/default?alt=json' + (base ? '-in-script' : '') + '&max-results=100';
+    if (base) {
+      feedJSONP(base + path, function (data) { applyRemoteConfig(data); done(); });
+    } else {
+      fetch('/' + path)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) { applyRemoteConfig(data); done(); })
+        .catch(function () { done(); });
+    }
+  }
+
+  /* Upgrade Blogger thumbnail URLs (s72-c) to a bigger crop. */
+  function bigThumb(url, size) {
+    if (!url) return null;
+    var repl = size || 'w640-h400-p-k-no-nu';
+    return url
+      .replace(/\/(s|w)\d+(-h\d+)?(-[a-z-]+)?\//, '/' + repl + '/')
+      .replace(/=(s|w)\d+(-h\d+)?(-[a-z-]+)?$/, '=' + repl);
+  }
+  function svgPlaceholder(label, hue1, hue2) {
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="' + (hue1 || '#79603c') + '"/>' +
+      '<stop offset="1" stop-color="' + (hue2 || '#e07b1a') + '"/></linearGradient></defs>' +
+      '<rect width="640" height="400" fill="url(#g)"/>' +
+      '<circle cx="320" cy="170" r="58" fill="#ffffff" opacity=".18"/>' +
+      '<path d="M298 146l76 24-76 24z" fill="#ffffff" opacity=".55"/>' +
+      '<text x="320" y="300" font-family="Georgia,serif" font-size="30" fill="#ffffff" opacity=".85" text-anchor="middle">' +
+      String(label || 'Image').replace(/[<>&"]/g, '') + '</text></svg>');
+  }
+  var PLACEHOLDER = svgPlaceholder('No image', '#cbd5e1', '#eef2f7');
+  window.PB_PLACEHOLDER = PLACEHOLDER;
+
+  /* ---------- built-in demo content (used when no blog is linked) ---------- */
+  var DEMO_PALETTES = {
+    'Featured': ['#7c2d12', '#e07b1a'], 'News': ['#1a2c8c', '#3b82f6'],
+    'Events': ['#7c2d12', '#f59e0b'], 'Obituaries': ['#374151', '#6b7280'],
+    'Books': ['#14532d', '#22c55e'], 'Awards': ['#713f12', '#eab308']
+  };
+  var DEMO_TITLES = {
+    'Featured': ['A Night of Kathakali Under the Monsoon Sky', 'The Veena Masters Keeping an Ancient Sound Alive', 'Theyyam: Where Gods Walk Among the Devotees'],
+    'News': ['State Academy Announces Fellowships for Young Performers', 'Heritage Theatre Reopens After Two-Year Restoration', 'New Digital Archive to Document Folk Traditions', 'Cultural Exchange Programme Invites Applications', 'Annual Dance Conference Dates Announced'],
+    'Events': ['Classical Dance Festival Comes to the River Ghats', 'Weekend Percussion Workshop for Beginners', 'An Evening of Storytelling and Shadow Puppetry', 'Temple Festival Season Opens with Panchavadyam', 'Youth Theatre Collective Stages New Production'],
+    'Obituaries': ['Remembering a Beloved Guru of the Old School', 'Folk Singer Who Carried a Century of Songs', 'A Quiet Custodian of a Vanishing Art Form', 'The Drummer Whose Rhythm Defined a Generation', 'Farewell to a Legendary Stage Actress'],
+    'Books': ['New Biography Traces a Dancer’s Sixty-Year Journey', 'Illustrated Guide to Temple Murals Released', 'Anthology of Folk Songs Gets English Translation', 'Memoir of a Touring Theatre Troupe Launched', 'Scholars Compile History of Regional Cinema'],
+    'Awards': ['National Honours Announced for Senior Artistes', 'Young Percussionist Wins International Prize', 'Lifetime Achievement Award for Veteran Vocalist', 'State Awards Celebrate Folk Art Revival', 'Academy Names This Year’s Yuva Fellows']
+  };
+  var DEMO_AUTHORS = ['Content Desk', 'Arts Editor', 'Staff Reporter', 'Guest Writer'];
+  function demoPosts(label, max) {
+    var titles = DEMO_TITLES[label] || DEMO_TITLES['News'];
+    var pal = DEMO_PALETTES[label] || DEMO_PALETTES['News'];
+    var out = [];
+    for (var i = 0; i < Math.min(max, titles.length); i++) {
+      out.push({
+        title: titles[i],
+        url: '#demo',
+        image: svgPlaceholder(label || 'Story', pal[0], pal[1]),
+        excerpt: 'This is sample content shown because no blog is connected yet. Link your Blogger blog in config.js and real posts will appear here automatically.',
+        author: DEMO_AUTHORS[i % DEMO_AUTHORS.length],
+        date: new Date(Date.now() - i * 86400000).toISOString(),
+        labels: label ? [label] : ['News']
+      });
+    }
+    return out;
+  }
+
+  /* ---------- feed access ---------- */
+  var jsonpCounter = 0;
+  function feedJSONP(url, cb) {
+    var name = '__pbfeed' + (++jsonpCounter);
+    var done = false;
+    var timer = setTimeout(function () { finish(null); }, 10000);
+    function finish(data) {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      try { delete window[name]; } catch (e) { window[name] = undefined; }
+      if (s.parentNode) s.parentNode.removeChild(s);
+      cb(data);
+    }
+    window[name] = function (data) { finish(data); };
+    var s = document.createElement('script');
+    s.src = url + '&callback=' + name;
+    s.onerror = function () { finish(null); };
+    document.head.appendChild(s);
+  }
+  function fetchFeed(label, max, cb) {
+    if (window.PB_MOCK) { window.PB_MOCK(label, max, cb); return; }
+    var base = blogBase();
+    if (!base && !window.PB_ON_BLOGGER) {
+      /* static site with no blog linked yet: demo content */
+      setTimeout(function () { cb(demoPosts(label, max)); }, 150);
+      return;
+    }
+    var path = 'feeds/posts/default' +
+      (label ? '/-/' + encodeURIComponent(label) : '') +
+      '?alt=json' + (base ? '-in-script' : '') + '&max-results=' + max;
+    if (base) {
+      /* cross-origin (Vercel -> Blogger): JSONP */
+      feedJSONP(base + path, function (data) {
+        cb(data && data.feed ? (data.feed.entry || []).map(parseEntry) : []);
+      });
+    } else {
+      /* same origin (Blogger theme): plain fetch */
+      fetch('/' + path)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          cb(data && data.feed ? (data.feed.entry || []).map(parseEntry) : []);
+        })
+        .catch(function () { cb([]); });
+    }
+  }
+  function parseEntry(e) {
+    var link = '';
+    (e.link || []).forEach(function (l) { if (l.rel === 'alternate') link = l.href; });
+    var thumb = e.media$thumbnail ? bigThumb(e.media$thumbnail.url) : null;
+    if (!thumb) {
+      var html = (e.content && e.content.$t) || (e.summary && e.summary.$t) || '';
+      var m = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+      /* the captured src still carries feed HTML entities (&amp; etc.) */
+      if (m) thumb = decodeEntities(m[1]);
+    }
+    var text = ((e.summary && e.summary.$t) || (e.content && e.content.$t) || '')
+      .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    return {
+      title: (e.title && e.title.$t) || '(untitled)',
+      url: link,
+      image: thumb || PLACEHOLDER,
+      excerpt: text.slice(0, 160),
+      author: (e.author && e.author[0] && e.author[0].name && e.author[0].name.$t) || '',
+      date: (e.published && e.published.$t) || '',
+      labels: (e.category || []).map(function (c) { return c.term; })
+    };
+  }
+
+  /* ---------- card renderer ---------- */
+  function cardHTML(p) {
+    return '' +
+      '<a class="pb-link-cover" href="' + esc(safeUrl(p.url) || '#') + '" aria-label="' + esc(p.title) + '"></a>' +
+      '<span class="pb-card-img"><img loading="lazy" src="' + esc(safeImg(p.image) || PLACEHOLDER) + '" alt="" onerror="this.onerror=null;this.src=window.PB_PLACEHOLDER;"/></span>' +
+      '<span class="pb-card-body">' +
+      '<span class="pb-card-title">' + esc(p.title) + '</span>' +
+      '<span class="pb-card-excerpt">' + esc(p.excerpt) + '</span>' +
+      '<span class="pb-card-meta">' +
+      '<span class="pb-avatar" style="background:' + avatarColor(p.author) + '">' + esc(initials(p.author)) + '</span>' +
+      '<span class="who">' + esc(p.author || fmtDate(p.date)) + '</span>' +
+      '<span class="read">Read More</span>' +
+      '</span></span>';
+  }
+
+  /* ---------- hero carousel ---------- */
+  function buildHero() {
+    var host = $('#pb-hero-frame');
+    if (!host) return;
+    var heroLabel = CFG.heroLabel || 'Featured';
+    fetchFeed(heroLabel, 3, function (posts) {
+      if (!posts.length) { fetchFeed(null, 3, render); return; }
+      render(posts);
+    });
+    function render(posts) {
+      if (!posts.length) { host.parentNode.style.display = 'none'; return; }
+      host.innerHTML = '';
+      var dots = el('div', 'pb-hero-dots');
+      posts.forEach(function (p, i) {
+        var slide = el('a', 'pb-hero-slide' + (i === 0 ? ' active' : ''));
+        slide.href = safeUrl(p.url) || '#';
+        slide.innerHTML =
+          '<img src="' + esc(safeImg(bigThumb(p.image, 'w1600-h620-p-k-no-nu') || p.image) || PLACEHOLDER) + '" alt="" onerror="this.onerror=null;this.src=window.PB_PLACEHOLDER;"/>' +
+          '<span class="pb-hero-caption">' +
+          (p.labels && p.labels.length ? '<span class="chip">' + esc(p.labels[0]) + '</span>' : '') +
+          '<h3>' + esc(p.title) + '</h3></span>';
+        host.appendChild(slide);
+        var dot = el('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        if (i === 0) dot.className = 'active';
+        (function (k) { dot.addEventListener('click', function () { go(k); }); })(i);
+        dots.appendChild(dot);
+      });
+      host.appendChild(dots);
+      var idx = 0, n = posts.length, timer = null;
+      function go(i) {
+        idx = (i + n) % n;
+        $all('.pb-hero-slide', host).forEach(function (s, k) { s.classList.toggle('active', k === idx); });
+        $all('.pb-hero-dots button', host).forEach(function (d, k) { d.classList.toggle('active', k === idx); });
+      }
+      function play() { if (n > 1) timer = setInterval(function () { go(idx + 1); }, 5000); }
+      host.addEventListener('mouseenter', function () { clearInterval(timer); });
+      host.addEventListener('mouseleave', play);
+      play();
+    }
+  }
+
+  /* ---------- homepage label sections ---------- */
+  function buildSections() {
+    var mount = $('#pb-sections');
+    if (!mount) return;
+    (CFG.sections || []).forEach(function (s) {
+      var sec = el('section', 'pb-section');
+      var labelBase = window.PB_ON_BLOGGER ? '/' : blogBase();
+      var moreUrl = safeUrl(s.url) ||
+        (s.label && labelBase ? labelBase + 'search/label/' + encodeURIComponent(s.label) : null);
+      sec.innerHTML =
+        '<div class="pb-wrap">' +
+        '<div class="pb-section-head"><h2>' + esc(s.title) + '</h2><span class="rule"></span>' +
+        (moreUrl ? '<a class="more" href="' + esc(moreUrl) + '">More &#8594;</a>' : '') +
+        '</div>' +
+        '<div class="pb-grid">' +
+        '<div class="pb-skeleton"></div><div class="pb-skeleton"></div><div class="pb-skeleton"></div>' +
+        '<div class="pb-skeleton"></div><div class="pb-skeleton"></div>' +
+        '</div></div>';
+      mount.appendChild(sec);
+      fetchFeed(s.label, s.count || 5, function (posts) {
+        var grid = $('.pb-grid', sec);
+        if (!posts.length) { sec.style.display = 'none'; return; }
+        grid.innerHTML = '';
+        posts.forEach(function (p) {
+          grid.appendChild(el('article', 'pb-card', cardHTML(p)));
+        });
+      });
+    });
+  }
+
+  /* ---------- quote banner ---------- */
+  function buildQuote() {
+    var host = $('#pb-quote');
+    if (!host) return;
+    var q = CFG.quote;
+    if (!q || !q.text) { host.style.display = 'none'; return; }
+    var qImg = q.image ? safeImg(q.image) : '';
+    host.innerHTML =
+      '<div class="pb-wrap"><div class="pb-quote-inner">' +
+      (qImg ? '<img src="' + esc(qImg) + '" alt="' + esc(q.name || '') + '"/>' : '') +
+      '<div class="pb-quote-text">' +
+      '<blockquote>' + esc(q.text) + '</blockquote>' +
+      (q.name ? '<div class="name">' + esc(q.name) + '</div>' : '') +
+      (q.role ? '<div class="role">' + esc(q.role) + '</div>' : '') +
+      '</div></div></div>';
+  }
+
+  /* ---------- YouTube videos ---------- */
+  function buildVideos() {
+    var band = $('#pb-videos');
+    if (!band) return;
+    var vids = CFG.videos || [];
+    if (!vids.length) { band.style.display = 'none'; return; }
+    var grid = $('.pb-video-grid', band);
+    vids.forEach(function (v) {
+      var thumb = safeImg(v.thumb) || ('https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/hqdefault.jpg');
+      var b = el('button', 'pb-video');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Play ' + (v.title || 'video'));
+      b.innerHTML =
+        '<img loading="lazy" src="' + esc(thumb) + '" alt=""/>' +
+        '<span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>' +
+        (v.title ? '<span class="vtitle">' + esc(v.title) + '</span>' : '');
+      b.addEventListener('click', function () {
+        b.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(v.id) +
+          '?autoplay=1" title="' + esc(v.title || 'YouTube video') + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      });
+      grid.appendChild(b);
+    });
+  }
+
+  /* ---------- footer (about / social / contact / subscribe) ---------- */
+  var ICONS = {
+    instagram: '<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-10.5a1.4 1.4 0 11-2.9 0 1.4 1.4 0 012.9 0z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 10-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0024 12z"/></svg>',
+    x: '<svg viewBox="0 0 24 24"><path d="M18.9 1.2h3.7l-8.1 9.3L24 22.8h-7.5l-5.9-7.7-6.7 7.7H.2l8.7-9.9L0 1.2h7.7l5.3 7 5.9-7zm-1.3 19.5h2L6.6 3.3H4.4l13.2 17.4z"/></svg>',
+    linkedin: '<svg viewBox="0 0 24 24"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1a3.8 3.8 0 013.4-1.9c3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 110-4.1 2.1 2.1 0 010 4.1zM7.1 20.5H3.5V9h3.6v11.5z"/></svg>',
+    pinterest: '<svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 00-4.4 23.2c-.1-.9-.2-2.4 0-3.4l1.4-6s-.4-.7-.4-1.8c0-1.7 1-3 2.2-3 1 0 1.5.8 1.5 1.7 0 1-.7 2.6-1 4-.3 1.2.6 2.2 1.8 2.2 2.1 0 3.8-2.3 3.8-5.5 0-2.9-2.1-4.9-5-4.9a5.2 5.2 0 00-5.4 5.2c0 1 .4 2.1.9 2.7l.1.4-.3 1.4c-.1.2-.2.3-.4.2-1.5-.7-2.4-2.9-2.4-4.7 0-3.8 2.8-7.3 8-7.3 4.2 0 7.5 3 7.5 7 0 4.2-2.6 7.6-6.3 7.6-1.2 0-2.4-.7-2.8-1.4l-.8 2.9c-.3 1-1 2.4-1.5 3.2A12 12 0 1012 0z"/></svg>',
+    whatsapp: '<svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.6 7.6 0 01-3.8-3.3c-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 00-.8.4A3.4 3.4 0 006 9.6a6 6 0 001.2 3.2 13.7 13.7 0 005.3 4.7c2 .8 2.7.9 3.7.7a3 3 0 002-1.4 2.5 2.5 0 00.2-1.4c-.1-.2-.3-.3-.6-.4zM12 22h-.1a10 10 0 01-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A10 10 0 1112 22zm0-22a12 12 0 00-10.2 18.3L0 24l5.8-1.5A12 12 0 1012 0z"/></svg>',
+    email: '<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.9 15.9 0 006.6 6.6l2.2-2.2a1 1 0 011-.2 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.3 1l-2.2 2.2z"/></svg>',
+    pin: '<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>'
+  };
+  function buildFooter() {
+    var f = CFG.footer || {};
+    var aboutHost = $('#pb-footer-about');
+    if (aboutHost) {
+      aboutHost.innerHTML =
+        '<div class="pb-brand-title">' + esc(f.title || document.title || 'My Blog') + '</div>' +
+        (f.about ? '<p class="pb-footer-about">' + esc(f.about) + '</p>' : '') +
+        '<div class="pb-social">' +
+        (f.social || []).map(function (s) {
+          var ic = ICONS[s.type] || ICONS.email;
+          return '<a href="' + esc(safeUrl(s.url) || '#') + '" target="_blank" rel="noopener" aria-label="' + esc(s.type) + '">' + ic + '</a>';
+        }).join('') +
+        '</div>';
+    }
+    var contactHost = $('#pb-footer-contact');
+    if (contactHost) {
+      var c = f.contact || {};
+      var rows = '';
+      if (c.email) rows += '<p>' + ICONS.email + '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a></p>';
+      if (c.phone) rows += '<p>' + ICONS.phone + '<a href="tel:' + esc(String(c.phone).replace(/\s+/g, '')) + '">' + esc(c.phone) + '</a></p>';
+      if (c.whatsapp) rows += '<p>' + ICONS.whatsapp + '<a href="https://wa.me/' + esc(String(c.whatsapp).replace(/[^0-9]/g, '')) + '" target="_blank" rel="noopener">WhatsApp us</a></p>';
+      if (c.address) rows += '<p>' + ICONS.pin + '<span>' + esc(c.address) + '</span></p>';
+      contactHost.innerHTML = rows || '<p>Add contact details in the site config.</p>';
+    }
+    var subHost = $('#pb-footer-subscribe');
+    if (subHost) {
+      var n = f.newsletter || {};
+      var action = safeUrl(n.action);
+      if (!action) { subHost.style.display = 'none'; }
+      else {
+        subHost.innerHTML =
+          '<h4>' + esc(n.title || 'Subscribe to our updates') + '</h4>' +
+          '<form class="pb-subscribe-form" method="post" action="' + esc(action) + '" target="_blank">' +
+          '<input type="email" required name="' + esc(n.field || 'email') + '" placeholder="Enter your email"/>' +
+          '<button type="submit">Subscribe</button></form>' +
+          (n.note ? '<div class="pb-footer-note">' + esc(n.note) + '</div>' : '');
+      }
+    }
+  }
+
+  /* ---------- header: static-site brand/nav/search (theme renders these server-side) ---------- */
+  /* Two-tone brand text, built ONLY from escaped pieces (last word gets the accent). */
+  function brandTitleHtml(title) {
+    var t = String(title || '').trim();
+    if (!t) return '';
+    var parts = t.split(/\s+/);
+    if (parts.length < 2) return esc(t);
+    var last = parts.pop();
+    return esc(parts.join(' ')) + ' <span class="accent">' + esc(last) + '</span>';
+  }
+  function buildStaticHeader() {
+    var brandHost = $('#pb-brand-js');
+    if (brandHost) {
+      var b = CFG.brand || {};
+      var logo = safeImg(b.logo);
+      brandHost.innerHTML =
+        '<a class="pb-brand" href="' + esc(safeUrl(b.homeUrl) || '/') + '">' +
+        (logo
+          ? '<img src="' + esc(logo) + '" alt="' + esc(b.title || 'Home') + '"/>'
+          : '<span><span class="pb-brand-title">' + brandTitleHtml(b.title || document.title) + '</span>' +
+            (b.tagline ? '<span class="pb-brand-tagline">' + esc(b.tagline) + '</span>' : '') + '</span>') +
+        '</a>';
+    }
+    var navHost = $('#pb-nav');
+    if (navHost && navHost.hasAttribute('data-js')) {
+      navHost.innerHTML = '<ul>' + (CFG.nav || []).map(function (l) {
+        return '<li><a href="' + esc(safeUrl(l.url) || '#') + '">' + esc(l.text) + '</a></li>';
+      }).join('') + '</ul>';
+    }
+    var searchHost = $('#pb-search-js');
+    if (searchHost) {
+      var base = blogBase();
+      if (!base) { searchHost.style.display = 'none'; }
+      else {
+        searchHost.innerHTML =
+          '<form action="' + esc(base) + 'search" method="get" role="search">' +
+          '<input aria-label="Search" name="q" placeholder="Search here" type="search"/>' +
+          '<button aria-label="Search" type="submit">' +
+          '<svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' +
+          '</button></form>';
+      }
+    }
+  }
+
+  /* ---------- header interactions ---------- */
+  function initHeader() {
+    var btn = $('#pb-menu-btn'), nav = $('#pb-nav');
+    if (btn && nav) {
+      btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+    }
+  }
+
+  /* ---------- server-rendered bits (Blogger theme only) ---------- */
+  function upgradeThumbs() {
+    $all('img.pb-thumb').forEach(function (img) {
+      var raw = img.getAttribute('data-pbthumb');
+      var big = bigThumb(raw);
+      if (big) img.src = big;
+      else img.src = PLACEHOLDER;
+      img.onerror = function () { this.onerror = null; this.src = PLACEHOLDER; };
+    });
+  }
+  function fillAvatars() {
+    $all('.pb-avatar[data-name]').forEach(function (a) {
+      var name = a.getAttribute('data-name') || '';
+      a.textContent = initials(name);
+      a.style.background = avatarColor(name);
+    });
+  }
+
+  /* ---------- footer quick links + document title (static site only) ---------- */
+  function buildFooterExtras() {
+    var ql = $('#pb-footer-quicklinks');
+    if (ql) {
+      ql.innerHTML = (CFG.nav || []).map(function (l) {
+        return '<li><a href="' + esc(safeUrl(l.url) || '#') + '">' + esc(l.text) + '</a></li>';
+      }).join('');
+    }
+    var cn = $('#pb-copy-name');
+    if (cn) {
+      var nm = (CFG.footer && CFG.footer.title) || (CFG.brand && CFG.brand.title);
+      if (nm) cn.textContent = nm;
+    }
+    if (!window.PB_ON_BLOGGER && CFG.brand && CFG.brand.title) {
+      document.title = CFG.brand.title + (CFG.brand.tagline ? ' — ' + CFG.brand.tagline : '');
+    }
+  }
+
+  /* ---------- boot ---------- */
+  function boot() {
+    buildStaticHeader();
+    initHeader();
+    upgradeThumbs();
+    fillAvatars();
+    buildFooter();
+    buildFooterExtras();
+    if (document.body.classList.contains('pb-is-home')) {
+      buildHero();
+      buildSections();
+      buildQuote();
+      buildVideos();
+    }
+    var y = document.getElementById('pb-year');
+    if (y) y.textContent = new Date().getFullYear();
+  }
+  function start() { loadRemoteConfig(boot); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+
+//]]></script>
+</body>
+</html>

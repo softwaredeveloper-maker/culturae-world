@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <b:if cond='data:view.isHomepage'>
+    <title><data:blog.pageTitle/></title>
+  <b:else/>
+    <title><data:blog.pageName/> | <data:blog.title/></title>
+  </b:if>
+  <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' name='description'/>
+  </b:if>
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+
+  <b:skin><![CDATA[/*
+-----------------------------------------------
+Heritage Magazine — a Blogger theme styled after
+magazine/news portals (reference: punarjjanibharat.com)
+-----------------------------------------------
+<Group description="Theme Colors" selector="body">
+  <Variable name="primary.color" description="Accent color (saffron)" type="color" default="#e07b1a" value="#e07b1a"/>
+  <Variable name="secondary.color" description="Secondary color (brown)" type="color" default="#79603c" value="#79603c"/>
+  <Variable name="dark.color" description="Footer / dark bands" type="color" default="#04122b" value="#04122b"/>
+  <Variable name="page.background" description="Page background" type="color" default="#f8fafc" value="#f8fafc"/>
+</Group>
+*/
+
+@@CSS@@
+
+/* Blogger theme-designer overrides (edit colors in Theme > Customize) */
+:root {
+  --pb-primary: $(primary.color);
+  --pb-secondary: $(secondary.color);
+  --pb-dark: $(dark.color);
+  --pb-bg: $(page.background);
+}
+]]></b:skin>
+
+  <script>//<![CDATA[
+window.PB_ON_BLOGGER = true;
+/* ================= EDIT ME: SITE CONFIG =================
+   Everything site-specific lives in this one block.
+   Labels below must EXACTLY match the labels you put on posts. */
+window.PB_CONFIG = {
+
+  /* Hero carousel: shows the 3 latest posts with this label
+     (falls back to the 3 newest posts if the label is unused). */
+  heroLabel: 'Featured',
+
+  /* Homepage sections: one row of 5 cards per entry.
+     "label" = Blogger post label to pull; "url" = the More link. */
+  sections: [
+    { title: 'Updates',          label: 'News' },
+    { title: 'Events',           label: 'Events' },
+    { title: 'Obituaries',       label: 'Obituaries' },
+    { title: 'Books & Literature', label: 'Books' },
+    { title: 'Awards & Honours', label: 'Awards' }
+  ],
+
+  /* Quote banner on the homepage. Set text:'' to hide it. */
+  quote: {
+    image: '',                      /* paste an image URL, or leave '' */
+    text:  'Art is the bridge between the soul and the world',
+    name:  'Your Featured Voice',
+    role:  'Edit this in the theme HTML (PB_CONFIG)'
+  },
+
+  /* YouTube section: add {id:'VIDEOID', title:'...'} entries.
+     The ID is the part after v= in a YouTube URL.
+     Leave the list empty [] to hide the whole section. */
+  videos: [],
+
+  /* Footer */
+  footer: {
+    title: '',                      /* '' = use the blog title */
+    about: 'Stories, events and voices from the world of arts and culture. Edit this in /admin on the main site, or here in PB_CONFIG.',
+    social: [
+      { type: 'instagram', url: '#' },
+      { type: 'youtube',   url: '#' },
+      { type: 'facebook',  url: '#' },
+      { type: 'x',         url: '#' }
+    ],
+    contact: {
+      email: 'info@culturae.world',
+      phone: '+91 00000 00000',
+      whatsapp: '',                 /* e.g. '919876543210' to show a WhatsApp link */
+      address: ''
+    },
+    /* Newsletter box: point "action" at a Google Form / Mailchimp URL.
+       Leave action:'' to hide the box. */
+    newsletter: {
+      title: 'Subscribe to our updates',
+      action: '',
+      field: 'email',
+      note: ''
+    }
+  }
+};
+/* =============== END OF SITE CONFIG =============== */
+//]]></script>
+</head>
+
+<body>
+  <b:class cond='data:view.isHomepage' name='pb-is-home'/>
+  <b:class cond='data:view.isSingleItem' name='pb-is-item'/>
+
+  <!-- ================= HEADER ================= -->
+  <header class='pb-header'>
+    <div class='pb-header-inner'>
+      <b:section class='pb-brand-slot' id='header' maxwidgets='1' name='Header' showaddelement='no'>
+        <b:widget id='Header1' locked='true' title='(Header)' type='Header' version='1'>
+          <b:includable id='main'>
+            <a class='pb-brand' expr:href='data:blog.homepageUrl'>
+              <b:if cond='data:useImage'>
+                <img expr:alt='data:title' expr:src='data:sourceUrl'/>
+              <b:else/>
+                <span>
+                  <span class='pb-brand-title'><data:title/></span>
+                  <b:if cond='data:description'>
+                    <span class='pb-brand-tagline'><data:description/></span>
+                  </b:if>
+                </span>
+              </b:if>
+            </a>
+          </b:includable>
+        </b:widget>
+      </b:section>
+
+      <nav class='pb-nav' id='pb-nav'>
+        <b:section class='pb-nav-slot' id='nav' maxwidgets='1' name='Main Menu' showaddelement='no'>
+          <b:widget id='LinkList1' locked='true' title='Menu' type='LinkList' version='1'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-0'>Home</b:widget-setting>
+              <b:widget-setting name='link-0'>/</b:widget-setting>
+              <b:widget-setting name='text-1'>News</b:widget-setting>
+              <b:widget-setting name='link-1'>/search/label/News</b:widget-setting>
+              <b:widget-setting name='text-2'>Featured</b:widget-setting>
+              <b:widget-setting name='link-2'>/search/label/Featured</b:widget-setting>
+              <b:widget-setting name='text-3'>Events</b:widget-setting>
+              <b:widget-setting name='link-3'>/search/label/Events</b:widget-setting>
+              <b:widget-setting name='text-4'>Contact Us</b:widget-setting>
+              <b:widget-setting name='link-4'>/p/contact.html</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <ul>
+                <b:loop values='data:links' var='link'>
+                  <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                </b:loop>
+              </ul>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </nav>
+
+      <div class='pb-search'>
+        <form expr:action='data:blog.homepageUrl + "search"' method='get' role='search'>
+          <input aria-label='Search this site' name='q' placeholder='Search here' type='search'/>
+          <button aria-label='Search' type='submit'>
+            <svg fill='none' stroke='currentColor' stroke-width='2.4' viewBox='0 0 24 24'><circle cx='11' cy='11' r='7'/><path d='M21 21l-4.3-4.3'/></svg>
+          </button>
+        </form>
+      </div>
+
+      <button aria-label='Open menu' class='pb-menu-btn' id='pb-menu-btn' type='button'>
+        <svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M4 6h16M4 12h16M4 18h16'/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HOMEPAGE: HERO ================= -->
+  <div class='pb-hero pb-home-only'>
+    <div class='pb-hero-frame' id='pb-hero-frame'>
+      <div class='pb-skeleton' style='position:absolute; inset:0; border-radius:0;'></div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN (Blog posts) ================= -->
+  <main>
+    <b:section class='pb-main' id='main' maxwidgets='1' name='Blog Posts' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+        <b:includable id='main' var='top'>
+
+          <b:if cond='data:view.isError'>
+            <div class='pb-wrap pb-index'>
+              <div class='pb-status-msg'>
+                <h2>Page not found</h2>
+                <p>The page you were looking for does not exist.</p>
+                <a class='pb-comment-cta' expr:href='data:blog.homepageUrl'>Back to Home</a>
+              </div>
+            </div>
+
+          <b:elseif cond='data:view.isSingleItem'/>
+            <!-- ======== single post / static page ======== -->
+            <b:loop values='data:posts' var='post'>
+              <article class='pb-article'>
+                <div class='pb-article-card'>
+                  <b:if cond='data:post.labels'>
+                    <div style='margin-bottom:12px;'>
+                      <b:loop values='data:post.labels' var='label'>
+                        <a class='pb-label-chip' expr:href='data:label.url'><data:label.name/></a>
+                      </b:loop>
+                    </div>
+                  </b:if>
+                  <h1 class='pb-article-title'><data:post.title/></h1>
+                  <div class='pb-article-meta'>
+                    <span class='pb-avatar' expr:data-name='data:post.author'></span>
+                    <span><data:post.author/></span>
+                    <span class='dot'>&#8226;</span>
+                    <span><data:post.timestamp/></span>
+                  </div>
+                  <div class='pb-post-body'>
+                    <data:post.body/>
+                  </div>
+                  <b:if cond='data:view.isPost'>
+                    <div class='pb-share'>
+                      <span>Share</span>
+                      <a expr:href='"https://api.whatsapp.com/send?text=" + data:post.url' rel='noopener' target='_blank'>WhatsApp</a>
+                      <a expr:href='"https://www.facebook.com/sharer/sharer.php?u=" + data:post.url' rel='noopener' target='_blank'>Facebook</a>
+                      <a expr:href='"https://twitter.com/intent/tweet?url=" + data:post.url' rel='noopener' target='_blank'>X</a>
+                    </div>
+                  </b:if>
+                </div>
+
+                <b:if cond='data:view.isPost'>
+                  <div class='pb-pager'>
+                    <b:if cond='data:newerPageUrl'>
+                      <a expr:href='data:newerPageUrl'>&#8592; Newer Post</a>
+                    <b:else/>
+                      <span></span>
+                    </b:if>
+                    <b:if cond='data:olderPageUrl'>
+                      <a expr:href='data:olderPageUrl'>Older Post &#8594;</a>
+                    </b:if>
+                  </div>
+
+                  <div class='pb-comments'>
+                    <div class='pb-article-card'>
+                      <h3>Comments</h3>
+                      <b:loop values='data:post.comments' var='comment'>
+                        <div class='pb-comment'>
+                          <span class='pb-avatar' expr:data-name='data:comment.author'></span>
+                          <div>
+                            <span class='c-author'><data:comment.author/></span>
+                            <span class='c-date'><data:comment.timestamp/></span>
+                            <div class='c-body'><data:comment.body/></div>
+                          </div>
+                        </div>
+                      </b:loop>
+                      <b:if cond='data:post.allowNewComments'>
+                        <a class='pb-comment-cta' expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>Post a Comment</a>
+                      </b:if>
+                    </div>
+                  </div>
+                </b:if>
+              </article>
+            </b:loop>
+
+          <b:else/>
+            <!-- ======== index / label / search / archive ======== -->
+            <div class='pb-wrap pb-index'>
+              <b:if cond='data:view.isHomepage'>
+                <div class='pb-section-head'>
+                  <h2>Recent Articles</h2>
+                  <span class='rule'></span>
+                </div>
+              <b:else/>
+                <h1 class='pb-index-title'>
+                  <b:if cond='data:view.search.label'>
+                    <small>Category</small><data:view.search.label/>
+                  <b:elseif cond='data:view.search.query'/>
+                    <small>Search results for</small>&#8220;<data:view.search.query/>&#8221;
+                  <b:else/>
+                    <small>Browsing</small><data:blog.pageName/>
+                  </b:if>
+                </h1>
+              </b:if>
+
+              <div class='pb-grid'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='pb-card'>
+                    <a class='pb-link-cover' expr:href='data:post.url'></a>
+                    <span class='pb-card-img'>
+                      <img alt='' class='pb-thumb' expr:data-pbthumb='data:post.thumbnailUrl' expr:src='data:post.thumbnailUrl'/>
+                    </span>
+                    <span class='pb-card-body'>
+                      <span class='pb-card-title'><data:post.title/></span>
+                      <span class='pb-card-excerpt'><data:post.snippet/></span>
+                      <span class='pb-card-meta'>
+                        <span class='pb-avatar' expr:data-name='data:post.author'></span>
+                        <span class='who'><data:post.author/></span>
+                        <span class='read'>Read More</span>
+                      </span>
+                    </span>
+                  </article>
+                </b:loop>
+              </div>
+
+              <div class='pb-pager'>
+                <b:if cond='data:newerPageUrl'>
+                  <a expr:href='data:newerPageUrl'>&#8592; Newer Posts</a>
+                <b:else/>
+                  <span></span>
+                </b:if>
+                <b:if cond='data:olderPageUrl'>
+                  <a expr:href='data:olderPageUrl'>Older Posts &#8594;</a>
+                </b:if>
+              </div>
+            </div>
+          </b:if>
+
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </main>
+
+  <!-- ================= HOMEPAGE: label sections (JS) ================= -->
+  <div class='pb-home-only' id='pb-sections'></div>
+
+  <!-- ================= HOMEPAGE: quote banner ================= -->
+  <div class='pb-quote pb-home-only' id='pb-quote'></div>
+
+  <!-- ================= HOMEPAGE: YouTube ================= -->
+  <div class='pb-videos-band pb-home-only' id='pb-videos'>
+    <div class='pb-wrap'>
+      <section class='pb-section dark'>
+        <div class='pb-section-head'>
+          <h2>YouTube Videos</h2>
+          <span class='rule'></span>
+        </div>
+        <div class='pb-video-grid'></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class='pb-footer'>
+    <div class='pb-wrap'>
+      <div class='pb-footer-grid'>
+        <div class='pb-footer-brand' id='pb-footer-about'></div>
+        <div class='pb-footer-links'>
+          <h4>Quick Links</h4>
+          <b:section class='pb-footer-links-slot' id='footerlinks' maxwidgets='2' name='Footer Links' showaddelement='yes'>
+            <b:widget id='LinkList2' locked='false' title='Quick Links' type='LinkList' version='1'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                <b:widget-setting name='text-0'>Home</b:widget-setting>
+                <b:widget-setting name='link-0'>/</b:widget-setting>
+                <b:widget-setting name='text-1'>News</b:widget-setting>
+                <b:widget-setting name='link-1'>/search/label/News</b:widget-setting>
+                <b:widget-setting name='text-2'>Featured</b:widget-setting>
+                <b:widget-setting name='link-2'>/search/label/Featured</b:widget-setting>
+                <b:widget-setting name='text-3'>Events</b:widget-setting>
+                <b:widget-setting name='link-3'>/search/label/Events</b:widget-setting>
+                <b:widget-setting name='text-4'>Contact Us</b:widget-setting>
+                <b:widget-setting name='link-4'>/p/contact.html</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main'>
+                <ul>
+                  <b:loop values='data:links' var='link'>
+                    <li><a expr:href='data:link.target'><data:link.name/></a></li>
+                  </b:loop>
+                </ul>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <div class='pb-footer-contact' id='pb-footer-contact'></div>
+        </div>
+        <div id='pb-footer-subscribe'></div>
+      </div>
+    </div>
+    <div class='pb-footer-bottom'>
+      &#169; <span id='pb-year'></span> <data:blog.title/> &#8212; All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>//<![CDATA[
+@@JS@@
+//]]></script>
+</body>
+</html>
