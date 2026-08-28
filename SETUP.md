@@ -3,10 +3,10 @@
 A magazine site for your friend, styled after **punarjjanibharat.com** (saffron/brown/navy,
 Playfair Display + Lora, hero carousel, card sections, quote banner, YouTube grid, dark footer).
 
-**Known facts:** domain **culturae.world** bought on GoDaddy under **harisangeet@gmail.com**;
+**Known facts:** domain **culturae.world** bought on GoDaddy under **the friend’s Gmail (the one that bought the domain)**;
 public address **info@culturae.world**. Target layout: main site on Vercel at
 `culturae.world`, articles on Blogger at `blog.culturae.world`, everything owned by
-harisangeet@gmail.com.
+the friend’s Gmail (the one that bought the domain).
 
 Two pieces, use either or both:
 
@@ -24,19 +24,19 @@ no redeploy needed when new articles are posted.
 ## Step 0 — accounts (you must do this part yourself)
 
 I can't create accounts or handle passwords, so this part is manual. No new Gmail is
-needed — the friend's **harisangeet@gmail.com** (which already owns the GoDaddy domain)
+needed — the friend's **the friend’s Gmail (the one that bought the domain)** (which already owns the GoDaddy domain)
 becomes the owner of everything:
 
-1. **Blogger:** signed in as harisangeet@gmail.com → blogger.com → New Blog →
+1. **Blogger:** signed in as the friend’s Gmail (the one that bought the domain) → blogger.com → New Blog →
    name it "Culturae" → pick a `something.blogspot.com` address (anything; the custom
    domain comes later).
 2. **Vercel:** at vercel.com/signup choose **Continue with Email** with
-   harisangeet@gmail.com (it logs in with a code sent to the mail — no password needed).
+   the friend’s Gmail (the one that bought the domain) (it logs in with a code sent to the mail — no password needed).
    Hobby plan is free. Optional but better: a GitHub account with the same email first
    and sign up to Vercel with GitHub, so deploys happen on `git push`.
 3. **info@culturae.world (the public address):** GoDaddy → your domain → **Email
    forwarding** (free with the domain) → create `info@culturae.world` → forward to
-   `harisangeet@gmail.com`. Incoming mail to info@ then lands in the friend's Gmail.
+   `the friend’s Gmail (the one that bought the domain)`. Incoming mail to info@ then lands in the friend's Gmail.
    (To also *send as* info@culturae.world from Gmail, or get a real mailbox, that's a
    paid add-on — forwarding is enough to start.)
 
@@ -136,11 +136,11 @@ Without this the admin still works in **copy-paste mode** (it generates the conf
 friend pastes it into the `SITE-CONFIG` page in Blogger, HTML view). With it, saving is
 one click:
 
-1. console.cloud.google.com (signed in as **harisangeet@gmail.com**) → create a
+1. console.cloud.google.com (signed in as **the friend’s Gmail (the one that bought the domain)**) → create a
    project (any name, e.g. "culturae-admin").
 2. **APIs & Services → Library** → search "Blogger API" → Enable.
 3. **APIs & Services → OAuth consent screen** → External → fill app name + emails →
-   leave it in **Testing** mode and add **harisangeet@gmail.com** (and yours if you want)
+   leave it in **Testing** mode and add **the friend’s Gmail (the one that bought the domain)** (and yours if you want)
    under **Test users**. No verification needed this way.
 4. **APIs & Services → Credentials → Create credentials → OAuth client ID** →
    type **Web application** → under *Authorized JavaScript origins* add all of:
