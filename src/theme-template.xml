@@ -3,6 +3,7 @@
 <html b:version='2' class='v2' lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <meta content='#0b1120' name='theme-color'/>
   <b:include data='blog' name='all-head-content'/>
   <b:if cond='data:view.isHomepage'>
     <title><data:blog.pageTitle/></title>
@@ -22,10 +23,11 @@ Heritage Magazine — a Blogger theme styled after
 magazine/news portals (reference: punarjjanibharat.com)
 -----------------------------------------------
 <Group description="Theme Colors" selector="body">
-  <Variable name="primary.color" description="Accent color (saffron)" type="color" default="#e07b1a" value="#e07b1a"/>
-  <Variable name="secondary.color" description="Secondary color (brown)" type="color" default="#79603c" value="#79603c"/>
-  <Variable name="dark.color" description="Footer / dark bands" type="color" default="#04122b" value="#04122b"/>
-  <Variable name="page.background" description="Page background" type="color" default="#f8fafc" value="#f8fafc"/>
+  <Variable name="primary.color" description="Accent color (saffron)" type="color" default="#e8871e" value="#e8871e"/>
+  <Variable name="secondary.color" description="Secondary color (tan)" type="color" default="#c9a06a" value="#c9a06a"/>
+  <Variable name="dark.color" description="Footer / dark bands" type="color" default="#060b14" value="#060b14"/>
+  <Variable name="page.background" description="Page background" type="color" default="#0b1120" value="#0b1120"/>
+  <Variable name="surface.background" description="Cards / header background" type="color" default="#131b2c" value="#131b2c"/>
 </Group>
 */
 
@@ -37,6 +39,7 @@ magazine/news portals (reference: punarjjanibharat.com)
   --pb-secondary: $(secondary.color);
   --pb-dark: $(dark.color);
   --pb-bg: $(page.background);
+  --pb-surface: $(surface.background);
 }
 ]]></b:skin>
 

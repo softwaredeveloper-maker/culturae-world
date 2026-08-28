@@ -148,7 +148,7 @@
       '<text x="320" y="300" font-family="Georgia,serif" font-size="30" fill="#ffffff" opacity=".85" text-anchor="middle">' +
       String(label || 'Image').replace(/[<>&"]/g, '') + '</text></svg>');
   }
-  var PLACEHOLDER = svgPlaceholder('No image', '#cbd5e1', '#eef2f7');
+  var PLACEHOLDER = svgPlaceholder('No image', '#1a2438', '#223046');
   window.PB_PLACEHOLDER = PLACEHOLDER;
 
   /* ---------- built-in demo content (used when no blog is linked) ---------- */
