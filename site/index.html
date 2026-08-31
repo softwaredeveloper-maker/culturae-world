@@ -3,76 +3,254 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="theme-color" content="#0b1120"/>
-  <title>Culturae — Arts, Culture &amp; Heritage</title>
-  <meta name="description" content="Stories, events, news and voices from the world of arts and culture."/>
+  <meta name="theme-color" content="#0a0a0b"/>
+  <title>CULTRAE — Culture. Art. Expression.</title>
+  <meta name="description" content="A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression."/>
+  <meta property="og:title" content="CULTRAE — Culture. Art. Expression."/>
+  <meta property="og:description" content="A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://culturae.world/"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="cultrae.css"/>
+  <script>document.documentElement.className += ' js';</script>
 </head>
-<body class="pb-is-home">
+<body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="pb-header">
-    <div class="pb-header-inner">
-      <div id="pb-brand-js"></div>
-      <nav class="pb-nav" id="pb-nav" data-js></nav>
-      <div class="pb-search" id="pb-search-js"></div>
-      <button aria-label="Open menu" class="pb-menu-btn" id="pb-menu-btn" type="button">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  <!-- ========== HEADER ========== -->
+  <header class="site-head" id="head">
+    <div class="head-inner">
+      <a class="mark" href="#top">Cultrae</a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
+      <nav class="nav" id="nav">
+        <ul>
+          <li><a href="#ethos">The Ethos</a></li>
+          <li><a href="#projections">Projections</a></li>
+          <li><a href="#currents">Currents</a></li>
+          <li><a href="#archive">The Archive</a></li>
+          <li><a href="#dialogue">Dialogue</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
+  <div class="nav-scrim" id="scrim"></div>
 
-  <!-- ================= HERO ================= -->
-  <div class="pb-hero pb-home-only">
-    <div class="pb-hero-frame" id="pb-hero-frame">
-      <div class="pb-skeleton" style="position:absolute; inset:0; border-radius:0;"></div>
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1>Cultrae</h1>
+      <p class="tagline">Culture. Art. Expression.</p>
+      <p class="lede">A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.</p>
+      <div class="rule"></div>
     </div>
-  </div>
+    <div class="scroll-cue">Scroll</div>
+  </section>
 
-  <!-- ================= SECTIONS (from Blogger feeds or demo data) ================= -->
-  <div class="pb-home-only" id="pb-sections"></div>
-
-  <!-- ================= QUOTE BANNER ================= -->
-  <div class="pb-quote pb-home-only" id="pb-quote"></div>
-
-  <!-- ================= YOUTUBE ================= -->
-  <div class="pb-videos-band pb-home-only" id="pb-videos">
-    <div class="pb-wrap">
-      <section class="pb-section dark">
-        <div class="pb-section-head">
-          <h2>YouTube Videos</h2>
-          <span class="rule"></span>
+  <!-- ========== 01 · THE ETHOS ========== -->
+  <section class="section" id="ethos">
+    <div class="wrap split">
+      <div class="reveal">
+        <div class="section-num">Section 01</div>
+        <h2>The<br/>Ethos</h2>
+      </div>
+      <div class="reveal">
+        <p class="standfirst">Depth over Volume. Process over Outcome.</p>
+        <div class="body">
+          <p>Cultrae is a living cultural space. We work slowly. We listen carefully. We value depth over volume.</p>
+          <p>We curate artistic practices and conversations that reflect the rhythms of our time—rooted in history, yet open to experimentation. Our goal is to create a bridge between the artist and the observer, fostering a dialogue that extends beyond the ephemeral.</p>
         </div>
-        <div class="pb-video-grid"></div>
-      </section>
-    </div>
-  </div>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="pb-footer">
-    <div class="pb-wrap">
-      <div class="pb-footer-grid">
-        <div class="pb-footer-brand" id="pb-footer-about"></div>
-        <div class="pb-footer-links">
-          <h4>Quick Links</h4>
-          <ul id="pb-footer-quicklinks"></ul>
-        </div>
-        <div>
-          <h4>Contact Us</h4>
-          <div class="pb-footer-contact" id="pb-footer-contact"></div>
-        </div>
-        <div id="pb-footer-subscribe"></div>
       </div>
     </div>
-    <div class="pb-footer-bottom">
-      &#169; <span id="pb-year"></span> <span id="pb-copy-name">Culturae</span> &#8212; All Rights Reserved.
+  </section>
+
+  <!-- ========== 02 · PROJECTIONS ========== -->
+  <section class="section" id="projections">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-num">Section 02</div>
+        <h2>Projections</h2>
+        <p class="standfirst">Looking forward. A roadmap of forthcoming cultural explorations and collaborative ventures.</p>
+      </div>
+      <div class="proj reveal">
+        <article class="proj-item">
+          <div class="proj-idx">01</div>
+          <div>
+            <h3 class="proj-title">Digital Ancestry</h3>
+            <p class="proj-context">An examination of digital media as an active archive for communal history and collective memory.</p>
+          </div>
+          <div class="proj-time">Autumn 2026</div>
+        </article>
+        <article class="proj-item">
+          <div class="proj-idx">02</div>
+          <div>
+            <h3 class="proj-title">Sylvan Rhythms</h3>
+            <p class="proj-context">A site-specific physical installation exploring soundscapes, natural acoustics, and environmental spatiality.</p>
+          </div>
+          <div class="proj-time">Winter 2026</div>
+        </article>
+        <article class="proj-item">
+          <div class="proj-idx">03</div>
+          <div>
+            <h3 class="proj-title">Monolithic Silence</h3>
+            <p class="proj-context">A series of sculptural interventions exploring material memory and architectural stillness.</p>
+          </div>
+          <div class="proj-time">Spring 2027</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 03 · CURRENTS ========== -->
+  <section class="section" id="currents">
+    <div class="wrap split">
+      <div class="reveal">
+        <div class="section-num">Section 03</div>
+        <h2>Currents</h2>
+      </div>
+      <div class="reveal">
+        <p class="standfirst">The immediate present. Active projects, recent findings, and current states of mind.</p>
+        <div class="status-line"><span class="status-dot"></span> In Session</div>
+        <h3 class="current-title">Ethereal Form</h3>
+        <div class="body">
+          <p>Documenting the intersection of light and shadow in urban architecture. Preliminary visual research is now accessible in <a href="#archive" style="color:var(--brass)">The Archive</a>.</p>
+        </div>
+        <div class="journal">
+          <div class="label">Journal Note</div>
+          <blockquote>“We notice a distinct shift toward the tactile—a collective desire for art that can be felt as deeply as it is seen.”</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 04 · THE ARCHIVE ========== -->
+  <section class="section" id="archive">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-num">Section 04</div>
+        <div class="archive-head">
+          <h2>The Archive</h2>
+          <div class="vertical-tag">Curated Vertical 2026</div>
+        </div>
+      </div>
+      <div class="arch-grid reveal">
+        <article class="arch-item">
+          <div class="arch-cat">Visual Research</div>
+          <h3 class="arch-title">Ethereal Form</h3>
+          <p class="arch-desc">An exploration of light, shadow, and the human silhouette.</p>
+          <div class="arch-idx">Item 01</div>
+        </article>
+        <article class="arch-item">
+          <div class="arch-cat">Archival Series</div>
+          <h3 class="arch-title">Collective Memory</h3>
+          <p class="arch-desc">Documenting the intersection of shared history and personal narrative.</p>
+          <div class="arch-idx">Item 02</div>
+        </article>
+        <article class="arch-item">
+          <div class="arch-cat">Installation Study</div>
+          <h3 class="arch-title">Spatial Rhythms</h3>
+          <p class="arch-desc">Understanding how art occupies, alters, and transforms physical environments.</p>
+          <div class="arch-idx">Item 03</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 05 · DIALOGUE ========== -->
+  <section class="section" id="dialogue">
+    <div class="wrap dialogue-grid">
+      <div class="reveal">
+        <div class="section-num">Section 05</div>
+        <h2>Dialogue</h2>
+        <p class="standfirst">Begin the conversation. We are open to collaboration, inquiry, and quiet observation.</p>
+      </div>
+      <div class="reveal">
+        <a class="contact-row" href="tel:+919207761132">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 9207761132 <span class="arrow">&#8599;</span></div>
+        </a>
+        <a class="contact-row" href="mailto:info@culturae.world">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">info@culturae.world <span class="arrow">&#8599;</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-mark">Cultrae</div>
+      <div class="foot-tag">Culture &#8226; Art &#8226; Expression</div>
+      <div class="foot-base">
+        <span>&#169; <span id="year">2026</span> Cultrae. All Rights Reserved.</span>
+        <a href="mailto:info@culturae.world">info@culturae.world</a>
+      </div>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+  (function () {
+    var head = document.getElementById('head');
+    var burger = document.getElementById('burger');
+    var nav = document.getElementById('nav');
+    var scrim = document.getElementById('scrim');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* header hairline once scrolled */
+    var onScroll = function () {
+      head.classList.toggle('scrolled', window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* mobile drawer */
+    function setNav(open) {
+      nav.classList.toggle('open', open);
+      scrim.classList.toggle('show', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    burger.addEventListener('click', function () { setNav(!nav.classList.contains('open')); });
+    scrim.addEventListener('click', function () { setNav(false); });
+    nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setNav(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
+
+    /* reveal on scroll */
+    var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    function revealAll() { items.forEach(function (el) { el.classList.add('in'); }); }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: .08 });
+      items.forEach(function (el) { io.observe(el); });
+      /* failsafe: nothing stays invisible if the observer never fires */
+      setTimeout(function () {
+        if (!document.querySelector('.reveal.in')) revealAll();
+      }, 2000);
+    } else {
+      revealAll();
+    }
+
+    /* active section in nav */
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    if ('IntersectionObserver' in window) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var i = sections.indexOf(en.target);
+          links.forEach(function (a, k) { a.classList.toggle('active', k === i); });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach(function (s) { if (s) spy.observe(s); });
+    }
+  })();
+  </script>
 </body>
 </html>

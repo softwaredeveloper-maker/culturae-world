@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#0b1120"/>
+  <title>Culturae — Arts, Culture &amp; Heritage</title>
+  <meta name="description" content="Stories, events, news and voices from the world of arts and culture."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="config.js"></script>
+</head>
+<body class="pb-is-home">
+
+  <!-- ================= HEADER ================= -->
+  <header class="pb-header">
+    <div class="pb-header-inner">
+      <div id="pb-brand-js"></div>
+      <nav class="pb-nav" id="pb-nav" data-js></nav>
+      <div class="pb-search" id="pb-search-js"></div>
+      <button aria-label="Open menu" class="pb-menu-btn" id="pb-menu-btn" type="button">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <div class="pb-hero pb-home-only">
+    <div class="pb-hero-frame" id="pb-hero-frame">
+      <div class="pb-skeleton" style="position:absolute; inset:0; border-radius:0;"></div>
+    </div>
+  </div>
+
+  <!-- ================= SECTIONS (from Blogger feeds or demo data) ================= -->
+  <div class="pb-home-only" id="pb-sections"></div>
+
+  <!-- ================= QUOTE BANNER ================= -->
+  <div class="pb-quote pb-home-only" id="pb-quote"></div>
+
+  <!-- ================= YOUTUBE ================= -->
+  <div class="pb-videos-band pb-home-only" id="pb-videos">
+    <div class="pb-wrap">
+      <section class="pb-section dark">
+        <div class="pb-section-head">
+          <h2>YouTube Videos</h2>
+          <span class="rule"></span>
+        </div>
+        <div class="pb-video-grid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="pb-footer">
+    <div class="pb-wrap">
+      <div class="pb-footer-grid">
+        <div class="pb-footer-brand" id="pb-footer-about"></div>
+        <div class="pb-footer-links">
+          <h4>Quick Links</h4>
+          <ul id="pb-footer-quicklinks"></ul>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <div class="pb-footer-contact" id="pb-footer-contact"></div>
+        </div>
+        <div id="pb-footer-subscribe"></div>
+      </div>
+    </div>
+    <div class="pb-footer-bottom">
+      &#169; <span id="pb-year"></span> <span id="pb-copy-name">Culturae</span> &#8212; All Rights Reserved.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
