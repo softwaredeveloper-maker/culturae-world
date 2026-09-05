@@ -42,6 +42,7 @@ const html = `<!DOCTYPE html>
 
   <script id="cultrae-content" type="application/json">${jsonForScript}</script>
   <script src="render.js"></script>
+  <script src="publish-config.js"></script>
   <script src="app-cultrae.js"></script>
 </body>
 </html>

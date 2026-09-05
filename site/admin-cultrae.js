@@ -607,18 +607,161 @@
     pane.appendChild(bar);
   }
 
+  /* ---------------- publishing (GitHub contents API) ---------------- */
+  var TOKEN_KEY = 'cultrae_publish_token';
+  function getToken() {
+    try { return window.localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
+  }
+  function setToken(t) {
+    try {
+      if (t) window.localStorage.setItem(TOKEN_KEY, t);
+      else window.localStorage.removeItem(TOKEN_KEY);
+    } catch (e) {}
+  }
+  function b64utf8(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+  function gh(method, url, token, body) {
+    return fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) {
+          var m = j.message || ('HTTP ' + r.status);
+          if (r.status === 401) m = 'The token was rejected (401). It may be wrong or expired.';
+          if (r.status === 403) m = 'Token lacks permission (403). It needs Contents: Read and write on this repository.';
+          if (r.status === 404) m = 'Repository or file not found (404) — check the token has access to this repository.';
+          if (r.status === 409 || r.status === 422) m = 'The file changed since this page loaded. Reload the editor and publish again.';
+          throw new Error(m);
+        }
+        return j;
+      });
+    });
+  }
+  function publishLive(btn, statusEl) {
+    var cfg = window.CULTRAE_PUBLISH || {};
+    var token = getToken();
+    if (!cfg.repo || !cfg.path) { toast('Publishing is not configured (publish-config.js).', true); return; }
+    if (!token) { toast('Add a publishing token first.', true); return; }
+
+    var api = 'https://api.github.com/repos/' + cfg.repo + '/contents/' + cfg.path;
+    var ref = encodeURIComponent(cfg.branch || 'main');
+    btn.disabled = true;
+    statusEl.textContent = 'Publishing…';
+
+    gh('GET', api + '?ref=' + ref, token)
+      .catch(function (e) {
+        if (/404/.test(e.message)) return {};   /* first publish — file may not exist yet */
+        throw e;
+      })
+      .then(function (cur) {
+        return gh('PUT', api, token, {
+          message: 'Update site content from /admin',
+          content: b64utf8(JSON.stringify(state.content, null, 2)),
+          branch: cfg.branch || 'main',
+          sha: cur && cur.sha ? cur.sha : undefined
+        });
+      })
+      .then(function (res) {
+        btn.disabled = false;
+        state.dirty = false;
+        var chip = $('#state-chip');
+        chip.className = 'chip saved';
+        chip.textContent = 'Published';
+        /* the live site now serves this, so a local draft would only mask it */
+        try { window.localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+        var sha = (res.commit && res.commit.sha ? res.commit.sha.slice(0, 7) : '');
+        statusEl.innerHTML = '✓ Published' + (sha ? ' (' + esc(sha) + ')' : '') +
+          '. Visitors see it within a minute — they may need one refresh.';
+        toast('Published to the live site.');
+      })
+      .catch(function (e) {
+        btn.disabled = false;
+        statusEl.textContent = '';
+        toast('Publish failed: ' + e.message, true);
+      });
+  }
+
   /* ---------------- publish pane ---------------- */
   function renderPublish(pane) {
     pane.innerHTML = '';
+    var cfg = window.CULTRAE_PUBLISH || {};
+
+    /* --- live publishing --- */
+    var live = el('details', 'group');
+    live.open = true;
+    live.appendChild(el('summary', null, 'Publish live'));
+    var li = el('div', 'inner');
+    li.appendChild(el('div', 'note',
+      'Sends your changes to the live website for <b>everyone</b>. No redeploy needed — ' +
+      'visitors pick it up on their next refresh.'));
+
+    var tokField = fldWrap('Publishing token',
+      'A GitHub fine-grained token for ' + (cfg.repo || 'the site repo') + ' with "Contents: Read and write". ' +
+      'It is stored only in this browser and never sent anywhere except GitHub.');
+    var tokRow = el('div', 'row-inline');
+    var tok = el('input');
+    tok.type = 'password';
+    tok.placeholder = getToken() ? '•••••••••• saved' : 'github_pat_…';
+    tok.autocomplete = 'off';
+    tok.style.cssText = 'flex:1;background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;color:var(--bone);font-family:var(--sans);font-size:13px;outline:none';
+    var save = el('button', 'btn sm', 'Save');
+    save.type = 'button';
+    var forget = el('button', 'btn sm danger', 'Forget');
+    forget.type = 'button';
+    tokRow.appendChild(tok); tokRow.appendChild(save); tokRow.appendChild(forget);
+    tokField.appendChild(tokRow);
+    if (tokField._hint) tokField.appendChild(tokField._hint);
+    li.appendChild(tokField);
+
+    var status = el('div', 'hint');
+    status.style.marginTop = '8px';
+
+    var pubBar = el('div', 'addbar');
+    var pub = el('button', 'btn primary', '⬆ Publish to live site');
+    pub.type = 'button';
+    pub.disabled = !getToken();
+    pub.addEventListener('click', function () { publishLive(pub, status); });
+    pubBar.appendChild(pub);
+
+    save.addEventListener('click', function () {
+      var v = tok.value.trim();
+      if (!v) { toast('Paste a token first.', true); return; }
+      setToken(v);
+      tok.value = '';
+      tok.placeholder = '•••••••••• saved';
+      pub.disabled = false;
+      toast('Token saved in this browser.');
+    });
+    forget.addEventListener('click', function () {
+      setToken('');
+      tok.value = '';
+      tok.placeholder = 'github_pat_…';
+      pub.disabled = true;
+      toast('Token removed from this browser.');
+    });
+
+    li.appendChild(pubBar);
+    li.appendChild(status);
+    live.appendChild(li);
+    pane.appendChild(live);
+
+    /* --- other options --- */
     pane.appendChild(el('div', 'note',
-      '<b>Apply to site</b> saves your changes into this browser, so the live preview link shows them on this device — ' +
-      'good for reviewing. It does not change what other people see.'));
-    pane.appendChild(el('div', 'note warn',
-      'To publish for everyone: press <b>Download</b>, send me the <code>content.json</code> file, and it goes live on the next deploy. ' +
-      'One-click publishing can be wired up once the site has its own account.'));
+      '<b>Apply to site</b> saves changes into this browser only — handy for reviewing a change ' +
+      'on this device before publishing it to everyone.'));
 
     var bar = el('div', 'addbar');
-    var apply = el('button', 'btn primary', 'Apply to site (this browser)');
+    var apply = el('button', 'btn', 'Apply to site (this browser)');
     apply.type = 'button';
     apply.addEventListener('click', applyDraft);
     var dl = el('button', 'btn', 'Download content.json');

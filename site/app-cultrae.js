@@ -124,6 +124,29 @@
   /* a draft only applies in this browser — it never affects other visitors */
   render(draft || base, !!draft);
 
+  /* ---------- published content ----------
+     The page already showed the version baked in at build time. Now check
+     the published file for anything newer, so edits made in /admin go live
+     for everyone without a redeploy. A local draft always wins (that editor
+     is previewing), and any failure silently keeps the built-in content. */
+  function looksLikeContent(o) {
+    return !!o && typeof o === 'object' && Array.isArray(o.sections) && !!o.theme;
+  }
+  (function loadPublished() {
+    if (draft) return;
+    var cfg = window.CULTRAE_PUBLISH || {};
+    if (!cfg.rawUrl || typeof fetch !== 'function') return;
+    var url = cfg.rawUrl + (cfg.rawUrl.indexOf('?') < 0 ? '?' : '&') + 't=' + Math.floor(Date.now() / 60000);
+    fetch(url, { cache: 'no-cache', mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (pub) {
+        if (!looksLikeContent(pub)) return;
+        if (JSON.stringify(pub) === JSON.stringify(base)) return;   /* already current */
+        render(pub, true);
+      })
+      .catch(function () { /* offline or blocked — built-in content stands */ });
+  })();
+
   /* live preview from the admin page (same-origin only) */
   window.addEventListener('message', function (ev) {
     if (ev.origin !== window.location.origin) return;
