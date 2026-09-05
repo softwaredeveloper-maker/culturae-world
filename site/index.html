@@ -10,247 +10,224 @@
   <meta property="og:description" content="A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://culturae.world/"/>
+  <link id="favicon" rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ctext%20y%3D%2250%22%20x%3D%2232%22%20font-size%3D%2252%22%20text-anchor%3D%22middle%22%3E%E2%97%88%3C%2Ftext%3E%3C%2Fsvg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link id="font-link" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="cultrae.css"/>
+  <style id="cultrae-vars">:root{--ink:#0a0a0b;--ink-2:#101012;--ink-3:#16161a;--line:#262529;--bone:#ece7dd;--muted:#9a958c;--faint:#6a665f;--brass:#c9a06a;--brass-dim:#8c6f45;--display:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--display-weight:300;--hero-size:176px;--hero-size-min:52px;--sec-size:68px;--body-size:16px;--ls-hero:0.12em;--ls-mark:0.42em;--ls-nav:0.22em;--ls-sec:0.1em;--maxw:1140px;--sec-pad:132px;--radius:0px;--hero-h:100svh;--bg-image:none;--bg-overlay:0.78;--bg-blur:0px;--bg-position:center;--bg-size:cover;--bg-attach:fixed;--glow-opacity:1;--grain-opacity:0;--reveal-dist:26px;--anim-speed:900ms;--divider:#262529;--header-blur:14px}</style>
   <script>document.documentElement.className += ' js';</script>
 </head>
 <body>
+  <div class="bg-layer"></div><div class="bg-veil"></div><div class="bg-glow"></div><div class="bg-grain"></div>
 
-  <!-- ========== HEADER ========== -->
-  <header class="site-head" id="head">
-    <div class="head-inner">
-      <a class="mark" href="#top">Cultrae</a>
-      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
-        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-      <nav class="nav" id="nav">
-        <ul>
-          <li><a href="#ethos">The Ethos</a></li>
-          <li><a href="#projections">Projections</a></li>
-          <li><a href="#currents">Currents</a></li>
-          <li><a href="#archive">The Archive</a></li>
-          <li><a href="#dialogue">Dialogue</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="nav-scrim" id="scrim"></div>
+  <div id="app"><header class="site-head" id="head"><div class="head-inner"><a class="mark" href="#top">CULTRAE</a><button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><nav class="nav" id="nav"><ul><li><a href="#ethos">The Ethos</a></li><li><a href="#projections">Projections</a></li><li><a href="#currents">Currents</a></li><li><a href="#archive">The Archive</a></li><li><a href="#dialogue">Dialogue</a></li></ul></nav></div></header><div class="nav-scrim" id="scrim"></div><main id="main"><section class="hero align-left" id="top"><div class="wrap"><h1>CULTRAE</h1><p class="tagline">Culture. Art. Expression.</p><p class="lede">A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.</p><div class="rule"></div></div><div class="scroll-cue">Scroll</div></section><section class="section" id="ethos"><div class="wrap split"><div class="reveal"><div class="section-num">Section 01</div><h2>The Ethos</h2></div><div class="reveal"><p class="standfirst">Depth over Volume. Process over Outcome.</p><div class="body"><p>Cultrae is a living cultural space. We work slowly. We listen carefully. We value depth over volume.</p><p>We curate artistic practices and conversations that reflect the rhythms of our time—rooted in history, yet open to experimentation. Our goal is to create a bridge between the artist and the observer, fostering a dialogue that extends beyond the ephemeral.</p></div></div></div></section><section class="section" id="projections"><div class="wrap"><div class="reveal"><div class="section-num">Section 02</div><h2>Projections</h2><p class="standfirst">Looking forward. A roadmap of forthcoming cultural explorations and collaborative ventures.</p></div><div class="proj reveal"><article class="proj-item"><div class="proj-idx">01</div><div><h3 class="proj-title">Digital Ancestry</h3><p class="proj-context">An examination of digital media as an active archive for communal history and collective memory.</p></div><div class="proj-time">Autumn 2026</div></article><article class="proj-item"><div class="proj-idx">02</div><div><h3 class="proj-title">Sylvan Rhythms</h3><p class="proj-context">A site-specific physical installation exploring soundscapes, natural acoustics, and environmental spatiality.</p></div><div class="proj-time">Winter 2026</div></article><article class="proj-item"><div class="proj-idx">03</div><div><h3 class="proj-title">Monolithic Silence</h3><p class="proj-context">A series of sculptural interventions exploring material memory and architectural stillness.</p></div><div class="proj-time">Spring 2027</div></article></div></div></section><section class="section" id="currents"><div class="wrap split"><div class="reveal"><div class="section-num">Section 03</div><h2>Currents</h2></div><div class="reveal"><p class="standfirst">The immediate present. Active projects, recent findings, and current states of mind.</p><div class="status-line"><span class="status-dot"></span> In Session</div><h3 class="current-title">Ethereal Form</h3><div class="body"><p>Documenting the intersection of light and shadow in urban architecture. Preliminary visual research is now accessible in <a class="inline-link" href="#archive">The Archive</a>.</p></div><div class="journal"><div class="label">Journal Note</div><blockquote>&ldquo;We notice a distinct shift toward the tactile—a collective desire for art that can be felt as deeply as it is seen.&rdquo;</blockquote></div></div></div></section><section class="section" id="archive"><div class="wrap"><div class="reveal"><div class="section-num">Section 04</div><div class="archive-head"><h2>The Archive</h2><div class="vertical-tag">Curated Vertical 2026</div></div></div><div class="arch-grid reveal" style="--arch-cols:3"><article class="arch-item"><div class="arch-cat">Visual Research</div><h3 class="arch-title">Ethereal Form</h3><p class="arch-desc">An exploration of light, shadow, and the human silhouette.</p><div class="arch-idx">Item 01</div></article><article class="arch-item"><div class="arch-cat">Archival Series</div><h3 class="arch-title">Collective Memory</h3><p class="arch-desc">Documenting the intersection of shared history and personal narrative.</p><div class="arch-idx">Item 02</div></article><article class="arch-item"><div class="arch-cat">Installation Study</div><h3 class="arch-title">Spatial Rhythms</h3><p class="arch-desc">Understanding how art occupies, alters, and transforms physical environments.</p><div class="arch-idx">Item 03</div></article></div></div></section><section class="section" id="dialogue"><div class="wrap dialogue-grid"><div class="reveal"><div class="section-num">Section 05</div><h2>Dialogue</h2><p class="standfirst">Begin the conversation. We are open to collaboration, inquiry, and quiet observation.</p></div><div class="reveal"><a class="contact-row" href="tel:+919207761132"><svg class="row-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.9 15.9 0 006.6 6.6l2.2-2.2a1 1 0 011-.2 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.3 1l-2.2 2.2z"/></svg><div class="contact-text"><div class="contact-label">Phone</div><div class="contact-value">+91 9207761132 <span class="arrow">&#8599;</span></div></div></a><a class="contact-row" href="mailto:info@culturae.world"><svg class="row-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><div class="contact-text"><div class="contact-label">Email</div><div class="contact-value">info@culturae.world <span class="arrow">&#8599;</span></div></div></a></div></div></section></main><footer class="site-foot"><div class="wrap"><div class="foot-mark">CULTRAE</div><div class="foot-tag">Culture • Art • Expression</div><div class="foot-base"><span>© 2026 CULTRAE. All Rights Reserved.</span><a href="mailto:info@culturae.world">info@culturae.world</a></div></div></footer></div>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero" id="top">
-    <div class="wrap">
-      <h1>Cultrae</h1>
-      <p class="tagline">Culture. Art. Expression.</p>
-      <p class="lede">A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.</p>
-      <div class="rule"></div>
-    </div>
-    <div class="scroll-cue">Scroll</div>
-  </section>
-
-  <!-- ========== 01 · THE ETHOS ========== -->
-  <section class="section" id="ethos">
-    <div class="wrap split">
-      <div class="reveal">
-        <div class="section-num">Section 01</div>
-        <h2>The<br/>Ethos</h2>
-      </div>
-      <div class="reveal">
-        <p class="standfirst">Depth over Volume. Process over Outcome.</p>
-        <div class="body">
-          <p>Cultrae is a living cultural space. We work slowly. We listen carefully. We value depth over volume.</p>
-          <p>We curate artistic practices and conversations that reflect the rhythms of our time—rooted in history, yet open to experimentation. Our goal is to create a bridge between the artist and the observer, fostering a dialogue that extends beyond the ephemeral.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 02 · PROJECTIONS ========== -->
-  <section class="section" id="projections">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="section-num">Section 02</div>
-        <h2>Projections</h2>
-        <p class="standfirst">Looking forward. A roadmap of forthcoming cultural explorations and collaborative ventures.</p>
-      </div>
-      <div class="proj reveal">
-        <article class="proj-item">
-          <div class="proj-idx">01</div>
-          <div>
-            <h3 class="proj-title">Digital Ancestry</h3>
-            <p class="proj-context">An examination of digital media as an active archive for communal history and collective memory.</p>
-          </div>
-          <div class="proj-time">Autumn 2026</div>
-        </article>
-        <article class="proj-item">
-          <div class="proj-idx">02</div>
-          <div>
-            <h3 class="proj-title">Sylvan Rhythms</h3>
-            <p class="proj-context">A site-specific physical installation exploring soundscapes, natural acoustics, and environmental spatiality.</p>
-          </div>
-          <div class="proj-time">Winter 2026</div>
-        </article>
-        <article class="proj-item">
-          <div class="proj-idx">03</div>
-          <div>
-            <h3 class="proj-title">Monolithic Silence</h3>
-            <p class="proj-context">A series of sculptural interventions exploring material memory and architectural stillness.</p>
-          </div>
-          <div class="proj-time">Spring 2027</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 03 · CURRENTS ========== -->
-  <section class="section" id="currents">
-    <div class="wrap split">
-      <div class="reveal">
-        <div class="section-num">Section 03</div>
-        <h2>Currents</h2>
-      </div>
-      <div class="reveal">
-        <p class="standfirst">The immediate present. Active projects, recent findings, and current states of mind.</p>
-        <div class="status-line"><span class="status-dot"></span> In Session</div>
-        <h3 class="current-title">Ethereal Form</h3>
-        <div class="body">
-          <p>Documenting the intersection of light and shadow in urban architecture. Preliminary visual research is now accessible in <a href="#archive" style="color:var(--brass)">The Archive</a>.</p>
-        </div>
-        <div class="journal">
-          <div class="label">Journal Note</div>
-          <blockquote>“We notice a distinct shift toward the tactile—a collective desire for art that can be felt as deeply as it is seen.”</blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 04 · THE ARCHIVE ========== -->
-  <section class="section" id="archive">
-    <div class="wrap">
-      <div class="reveal">
-        <div class="section-num">Section 04</div>
-        <div class="archive-head">
-          <h2>The Archive</h2>
-          <div class="vertical-tag">Curated Vertical 2026</div>
-        </div>
-      </div>
-      <div class="arch-grid reveal">
-        <article class="arch-item">
-          <div class="arch-cat">Visual Research</div>
-          <h3 class="arch-title">Ethereal Form</h3>
-          <p class="arch-desc">An exploration of light, shadow, and the human silhouette.</p>
-          <div class="arch-idx">Item 01</div>
-        </article>
-        <article class="arch-item">
-          <div class="arch-cat">Archival Series</div>
-          <h3 class="arch-title">Collective Memory</h3>
-          <p class="arch-desc">Documenting the intersection of shared history and personal narrative.</p>
-          <div class="arch-idx">Item 02</div>
-        </article>
-        <article class="arch-item">
-          <div class="arch-cat">Installation Study</div>
-          <h3 class="arch-title">Spatial Rhythms</h3>
-          <p class="arch-desc">Understanding how art occupies, alters, and transforms physical environments.</p>
-          <div class="arch-idx">Item 03</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 05 · DIALOGUE ========== -->
-  <section class="section" id="dialogue">
-    <div class="wrap dialogue-grid">
-      <div class="reveal">
-        <div class="section-num">Section 05</div>
-        <h2>Dialogue</h2>
-        <p class="standfirst">Begin the conversation. We are open to collaboration, inquiry, and quiet observation.</p>
-      </div>
-      <div class="reveal">
-        <a class="contact-row" href="tel:+919207761132">
-          <div class="contact-label">Phone</div>
-          <div class="contact-value">+91 9207761132 <span class="arrow">&#8599;</span></div>
-        </a>
-        <a class="contact-row" href="mailto:info@culturae.world">
-          <div class="contact-label">Email</div>
-          <div class="contact-value">info@culturae.world <span class="arrow">&#8599;</span></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-foot">
-    <div class="wrap">
-      <div class="foot-mark">Cultrae</div>
-      <div class="foot-tag">Culture &#8226; Art &#8226; Expression</div>
-      <div class="foot-base">
-        <span>&#169; <span id="year">2026</span> Cultrae. All Rights Reserved.</span>
-        <a href="mailto:info@culturae.world">info@culturae.world</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-  (function () {
-    var head = document.getElementById('head');
-    var burger = document.getElementById('burger');
-    var nav = document.getElementById('nav');
-    var scrim = document.getElementById('scrim');
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    /* header hairline once scrolled */
-    var onScroll = function () {
-      head.classList.toggle('scrolled', window.scrollY > 12);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    /* mobile drawer */
-    function setNav(open) {
-      nav.classList.toggle('open', open);
-      scrim.classList.toggle('show', open);
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
+  <script id="cultrae-content" type="application/json">{
+  "meta": {
+    "title": "CULTRAE — Culture. Art. Expression.",
+    "description": "A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.",
+    "favicon": "◈",
+    "url": "https://culturae.world/"
+  },
+  "theme": {
+    "colors": {
+      "ink": "#0a0a0b",
+      "ink2": "#101012",
+      "ink3": "#16161a",
+      "line": "#262529",
+      "bone": "#ece7dd",
+      "muted": "#9a958c",
+      "faint": "#6a665f",
+      "accent": "#c9a06a",
+      "accentDim": "#8c6f45"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Inter",
+      "displayWeight": "300"
+    },
+    "scale": {
+      "heroSize": 176,
+      "heroSizeMin": 52,
+      "sectionSize": 68,
+      "bodySize": 16,
+      "lsHero": 0.12,
+      "lsMark": 0.42,
+      "lsNav": 0.22,
+      "lsSection": 0.1
+    },
+    "layout": {
+      "maxWidth": 1140,
+      "sectionPadding": 132,
+      "radius": 0,
+      "heroHeight": 100
+    },
+    "background": {
+      "image": "",
+      "overlay": 0.78,
+      "blur": 0,
+      "position": "center",
+      "size": "cover",
+      "fixed": true,
+      "glow": true,
+      "grain": false
+    },
+    "effects": {
+      "reveal": true,
+      "revealDistance": 26,
+      "speed": 900,
+      "dividers": true,
+      "headerBlur": true,
+      "hoverShift": true,
+      "pulse": true
     }
-    burger.addEventListener('click', function () { setNav(!nav.classList.contains('open')); });
-    scrim.addEventListener('click', function () { setNav(false); });
-    nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setNav(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
-
-    /* reveal on scroll */
-    var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-    function revealAll() { items.forEach(function (el) { el.classList.add('in'); }); }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-        });
-      }, { rootMargin: '0px 0px -12% 0px', threshold: .08 });
-      items.forEach(function (el) { io.observe(el); });
-      /* failsafe: nothing stays invisible if the observer never fires */
-      setTimeout(function () {
-        if (!document.querySelector('.reveal.in')) revealAll();
-      }, 2000);
-    } else {
-      revealAll();
+  },
+  "header": {
+    "showMark": true,
+    "mark": "CULTRAE",
+    "sticky": true
+  },
+  "hero": {
+    "enabled": true,
+    "title": "CULTRAE",
+    "tagline": "Culture. Art. Expression.",
+    "lede": "A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.",
+    "rule": true,
+    "scrollCue": "Scroll",
+    "align": "left",
+    "image": "",
+    "imageOverlay": 0.6
+  },
+  "sections": [
+    {
+      "id": "ethos",
+      "type": "prose",
+      "enabled": true,
+      "navLabel": "The Ethos",
+      "num": "Section 01",
+      "title": "The Ethos",
+      "standfirst": "Depth over Volume. Process over Outcome.",
+      "body": [
+        "Cultrae is a living cultural space. We work slowly. We listen carefully. We value depth over volume.",
+        "We curate artistic practices and conversations that reflect the rhythms of our time—rooted in history, yet open to experimentation. Our goal is to create a bridge between the artist and the observer, fostering a dialogue that extends beyond the ephemeral."
+      ]
+    },
+    {
+      "id": "projections",
+      "type": "list",
+      "enabled": true,
+      "navLabel": "Projections",
+      "num": "Section 02",
+      "title": "Projections",
+      "standfirst": "Looking forward. A roadmap of forthcoming cultural explorations and collaborative ventures.",
+      "items": [
+        {
+          "idx": "01",
+          "title": "Digital Ancestry",
+          "meta": "Autumn 2026",
+          "text": "An examination of digital media as an active archive for communal history and collective memory."
+        },
+        {
+          "idx": "02",
+          "title": "Sylvan Rhythms",
+          "meta": "Winter 2026",
+          "text": "A site-specific physical installation exploring soundscapes, natural acoustics, and environmental spatiality."
+        },
+        {
+          "idx": "03",
+          "title": "Monolithic Silence",
+          "meta": "Spring 2027",
+          "text": "A series of sculptural interventions exploring material memory and architectural stillness."
+        }
+      ]
+    },
+    {
+      "id": "currents",
+      "type": "current",
+      "enabled": true,
+      "navLabel": "Currents",
+      "num": "Section 03",
+      "title": "Currents",
+      "standfirst": "The immediate present. Active projects, recent findings, and current states of mind.",
+      "status": "In Session",
+      "itemTitle": "Ethereal Form",
+      "body": [
+        "Documenting the intersection of light and shadow in urban architecture. Preliminary visual research is now accessible in [The Archive](#archive)."
+      ],
+      "quoteLabel": "Journal Note",
+      "quote": "We notice a distinct shift toward the tactile—a collective desire for art that can be felt as deeply as it is seen."
+    },
+    {
+      "id": "archive",
+      "type": "grid",
+      "enabled": true,
+      "navLabel": "The Archive",
+      "num": "Section 04",
+      "title": "The Archive",
+      "tag": "Curated Vertical 2026",
+      "columns": 3,
+      "items": [
+        {
+          "idx": "Item 01",
+          "meta": "Visual Research",
+          "title": "Ethereal Form",
+          "text": "An exploration of light, shadow, and the human silhouette.",
+          "image": "",
+          "icon": ""
+        },
+        {
+          "idx": "Item 02",
+          "meta": "Archival Series",
+          "title": "Collective Memory",
+          "text": "Documenting the intersection of shared history and personal narrative.",
+          "image": "",
+          "icon": ""
+        },
+        {
+          "idx": "Item 03",
+          "meta": "Installation Study",
+          "title": "Spatial Rhythms",
+          "text": "Understanding how art occupies, alters, and transforms physical environments.",
+          "image": "",
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "id": "dialogue",
+      "type": "contact",
+      "enabled": true,
+      "navLabel": "Dialogue",
+      "num": "Section 05",
+      "title": "Dialogue",
+      "standfirst": "Begin the conversation. We are open to collaboration, inquiry, and quiet observation.",
+      "rows": [
+        {
+          "icon": "phone",
+          "label": "Phone",
+          "value": "+91 9207761132",
+          "href": "tel:+919207761132"
+        },
+        {
+          "icon": "mail",
+          "label": "Email",
+          "value": "info@culturae.world",
+          "href": "mailto:info@culturae.world"
+        }
+      ]
     }
-
-    /* active section in nav */
-    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
-    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
-    if ('IntersectionObserver' in window) {
-      var spy = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (!en.isIntersecting) return;
-          var i = sections.indexOf(en.target);
-          links.forEach(function (a, k) { a.classList.toggle('active', k === i); });
-        });
-      }, { rootMargin: '-45% 0px -50% 0px' });
-      sections.forEach(function (s) { if (s) spy.observe(s); });
-    }
-  })();
-  </script>
+  ],
+  "footer": {
+    "mark": "CULTRAE",
+    "tagline": "Culture • Art • Expression",
+    "copyright": "© {year} CULTRAE. All Rights Reserved.",
+    "showEmail": true,
+    "email": "info@culturae.world",
+    "social": []
+  }
+}</script>
+  <script src="render.js"></script>
+  <script src="app-cultrae.js"></script>
 </body>
 </html>

@@ -4,294 +4,239 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Site Admin</title>
+  <title>CULTRAE — Site Editor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <style>
-    body.pb-admin { font-family: var(--pb-sans); background: var(--pb-bg); }
-    .ad-top {
-      position: sticky; top: 0; z-index: 50; background: var(--pb-dark); color: #fff;
-      display: flex; align-items: center; gap: 14px; padding: 12px 22px;
+    :root {
+      --ink: #0b0b0d; --panel: #141418; --panel-2: #1b1b21; --line: #2a2a32;
+      --bone: #ece7dd; --muted: #9a958c; --faint: #6a665f;
+      --brass: #c9a06a; --ok: #4ade80; --warn: #fbbf24; --bad: #f87171;
+      --sans: 'Inter', system-ui, sans-serif;
+      --display: 'Cormorant Garamond', Georgia, serif;
+      color-scheme: dark;
     }
-    .ad-top .logo { font-family: var(--pb-display); font-weight: 800; font-size: 19px; }
-    .ad-top .logo .accent { color: var(--pb-primary); }
-    .ad-top .links { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .ad-top a.tlink { color: #cbd5e1; font-size: 12.5px; font-weight: 600; }
-    .ad-top a.tlink:hover { color: var(--pb-primary); }
-    .ad-chip {
-      display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 5px 12px; font-size: 12.5px;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--ink); color: var(--bone);
+      font-family: var(--sans); font-size: 14px; height: 100vh; overflow: hidden;
     }
-    .ad-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; }
-    .ad-chip.on .dot { background: #22c55e; }
-    .ad-shell { display: flex; gap: 22px; max-width: 1180px; margin: 24px auto; padding: 0 20px; align-items: flex-start; }
-    .ad-side { width: 200px; flex-shrink: 0; position: sticky; top: 74px; }
-    .ad-side button {
-      display: block; width: 100%; text-align: left; border: 0; background: transparent;
-      padding: 11px 14px; border-radius: 10px; cursor: pointer; color: var(--pb-ink);
-      font-family: var(--pb-sans); font-size: 13.5px; font-weight: 600; margin-bottom: 4px;
+    a { color: var(--brass); text-decoration: none; }
+
+    /* ---------- top bar ---------- */
+    .top {
+      height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 16px;
+      background: var(--panel); border-bottom: 1px solid var(--line); flex-shrink: 0;
     }
-    .ad-side button:hover { background: var(--pb-surface); }
-    .ad-side button.active { background: var(--pb-primary); color: #fff; }
-    .ad-main { flex: 1; min-width: 0; }
-    .ad-panel { display: none; }
-    .ad-panel.active { display: block; }
-    .ad-card {
-      background: var(--pb-surface); border: 1px solid var(--pb-line); border-radius: 14px;
-      box-shadow: var(--pb-card-shadow);
-      padding: 22px; margin-bottom: 18px;
+    .top .logo {
+      font-family: var(--display); font-size: 19px; font-weight: 600;
+      letter-spacing: .3em; text-transform: uppercase;
     }
-    .ad-card h2 {
-      margin: 0 0 4px; font-family: var(--pb-display); font-size: 19px; color: var(--pb-ink);
+    .top .sep { width: 1px; height: 24px; background: var(--line); }
+    .chip {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px;
     }
-    .ad-card .sub { margin: 0 0 16px; font-size: 12.5px; color: var(--pb-muted); line-height: 1.55; }
-    .ad-field { margin-bottom: 12px; }
-    .ad-field label { display: block; font-size: 12px; font-weight: 600; color: var(--pb-muted); margin-bottom: 5px; }
-    .ad-field input, .ad-field textarea, .ad-field select {
-      width: 100%; border: 1px solid var(--pb-faint); border-radius: 9px; padding: 9px 12px;
-      font-family: var(--pb-sans); font-size: 13.5px; color: var(--pb-ink); background: var(--pb-surface-2); outline: none;
+    .chip.dirty { color: var(--warn); border-color: #6b4d09; }
+    .chip.saved { color: var(--ok); border-color: #14532d; }
+    .top .grow { flex: 1; }
+    .devices { display: flex; gap: 4px; background: var(--panel-2); border-radius: 8px; padding: 3px; }
+    .devices button {
+      border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 6px;
+      padding: 6px 11px; font-size: 11.5px; font-family: var(--sans); font-weight: 600;
     }
-    .ad-field input:focus, .ad-field textarea:focus, .ad-field select:focus { border-color: var(--pb-primary); }
-    .ad-field textarea { min-height: 90px; resize: vertical; }
-    .ad-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
-    @media (max-width: 700px) { .ad-cols { grid-template-columns: 1fr; } .ad-shell { flex-direction: column; } .ad-side { width: 100%; position: static; display: flex; flex-wrap: wrap; } .ad-side button { width: auto; } }
-    .ad-rows { display: flex; flex-direction: column; gap: 8px; }
-    .ad-row { display: flex; gap: 8px; align-items: center; }
-    .ad-row input, .ad-row select { flex: 1; border: 1px solid var(--pb-faint); border-radius: 9px; padding: 8px 11px; font-family: var(--pb-sans); font-size: 13px; min-width: 0; outline: none; color: var(--pb-ink); background: var(--pb-surface-2); }
-    .ad-row input:focus { border-color: var(--pb-primary); }
-    .ad-row .vthumb { width: 56px; height: 32px; object-fit: cover; border-radius: 6px; background: var(--pb-line); flex-shrink: 0; }
-    .ad-icon-btn {
-      border: 1px solid var(--pb-line); background: var(--pb-surface-2); border-radius: 8px; width: 30px; height: 30px;
-      cursor: pointer; color: var(--pb-muted); font-size: 13px; line-height: 1; flex-shrink: 0;
+    .devices button.on { background: var(--brass); color: #17140f; }
+
+    .btn {
+      border: 1px solid var(--line); background: var(--panel-2); color: var(--bone);
+      border-radius: 8px; padding: 8px 15px; font-size: 12.5px; font-weight: 600;
+      font-family: var(--sans); cursor: pointer; white-space: nowrap;
     }
-    .ad-icon-btn:hover { border-color: var(--pb-primary); color: var(--pb-primary); }
-    .ad-add { margin-top: 10px; }
-    .ad-btn {
-      border: 0; border-radius: 999px; padding: 10px 22px; cursor: pointer;
-      font-family: var(--pb-sans); font-size: 13.5px; font-weight: 700;
-      background: var(--pb-primary); color: #fff;
+    .btn:hover { border-color: var(--brass); color: var(--brass); }
+    .btn.primary { background: var(--brass); border-color: var(--brass); color: #17140f; }
+    .btn.primary:hover { background: #d8b07a; color: #17140f; }
+    .btn.sm { padding: 5px 10px; font-size: 11.5px; }
+    .btn.danger:hover { border-color: var(--bad); color: var(--bad); }
+
+    /* ---------- layout ---------- */
+    .shell { display: flex; height: calc(100vh - 56px); }
+    .editor {
+      width: 420px; flex-shrink: 0; border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; background: var(--panel);
     }
-    .ad-btn:hover { background: var(--pb-secondary); }
-    .ad-btn.ghost { background: transparent; color: var(--pb-secondary); border: 1px solid var(--pb-faint); }
-    .ad-btn.ghost:hover { border-color: var(--pb-primary); color: var(--pb-primary); background: var(--pb-surface-2); }
-    .ad-btn.small { padding: 7px 14px; font-size: 12.5px; }
-    .ad-btn.danger { background: transparent; color: #f87171; border: 1px solid #7f1d1d; }
-    .ad-btn.danger:hover { background: #b91c1c; color: #fff; }
-    .ad-btn:disabled { opacity: .45; cursor: not-allowed; }
-    .ad-savebar {
-      position: sticky; bottom: 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-      background: var(--pb-dark); border: 1px solid var(--pb-line); border-radius: 14px; padding: 13px 18px; box-shadow: 0 10px 30px rgba(0,0,0,.55);
+    .tabs { display: flex; border-bottom: 1px solid var(--line); flex-shrink: 0; overflow-x: auto; }
+    .tabs button {
+      flex: 1; border: 0; background: none; color: var(--muted); cursor: pointer;
+      padding: 12px 6px; font-size: 11.5px; font-weight: 600; font-family: var(--sans);
+      letter-spacing: .06em; border-bottom: 2px solid transparent; white-space: nowrap;
     }
-    .ad-savebar .note { color: #cbd5e1; font-size: 12px; margin-left: auto; }
-    .ad-status { list-style: none; margin: 0; padding: 0; }
-    .ad-status li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--pb-line); font-size: 13.5px; }
-    .ad-status li:last-child { border-bottom: 0; }
-    .ad-status .st { font-weight: 800; width: 20px; flex-shrink: 0; text-align: center; }
-    .ad-status .ok { color: #4ade80; } .ad-status .no { color: #fbbf24; }
-    .ad-status small { display: block; color: var(--pb-muted); margin-top: 2px; line-height: 1.5; }
-    .ad-shortcuts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-    .ad-shortcuts a {
-      display: block; background: var(--pb-surface-2); border: 1px solid var(--pb-line); border-radius: 10px;
-      padding: 13px 14px; font-size: 13px; font-weight: 600; color: var(--pb-ink);
+    .tabs button.on { color: var(--brass); border-bottom-color: var(--brass); }
+    .panes { flex: 1; overflow-y: auto; padding: 16px; }
+    .pane { display: none; }
+    .pane.on { display: block; }
+
+    .preview-wrap {
+      flex: 1; background: #050506; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start; overflow: hidden; padding: 14px;
     }
-    .ad-shortcuts a:hover { border-color: var(--pb-primary); color: var(--pb-primary); }
-    .ad-shortcuts a span { display: block; font-size: 11px; font-weight: 500; color: var(--pb-muted); margin-top: 3px; }
-    table.ad-posts { width: 100%; border-collapse: collapse; font-size: 13px; }
-    table.ad-posts th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--pb-muted); padding: 8px 10px; border-bottom: 2px solid var(--pb-line); }
-    table.ad-posts td { padding: 10px; border-bottom: 1px solid var(--pb-line); vertical-align: top; }
-    table.ad-posts .t { font-weight: 600; }
-    .ad-pill { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; border-radius: 999px; padding: 2px 9px; background: var(--pb-primary-soft); color: var(--pb-secondary-deep); margin: 1px 2px 1px 0; }
-    .ad-pill.draft { background: #3a2c0a; color: #fbd38d; }
-    .ad-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-    .ad-banner { border-radius: 12px; padding: 13px 16px; font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
-    .ad-banner.warn { background: #33270c; color: #fcd34d; border: 1px solid #7c5806; }
-    .ad-banner.info { background: #0f1f3d; color: #93c5fd; border: 1px solid #1e3a8a; }
-    .ad-banner.info a { color: #bfdbfe; }
-    .ad-banner code { background: rgba(255,255,255,.1); border-radius: 5px; padding: 1px 6px; }
-    #ad-toasts { position: fixed; right: 18px; bottom: 18px; z-index: 100; display: flex; flex-direction: column; gap: 8px; }
-    .ad-toast { background: var(--pb-surface-2); border: 1px solid var(--pb-line); color: #fff; border-radius: 10px; padding: 11px 16px; font-size: 13px; box-shadow: 0 10px 24px rgba(0,0,0,.55); max-width: 340px; }
-    .ad-toast.err { background: #b91c1c; border-color: #b91c1c; }
-    .ad-help h3 { font-family: var(--pb-display); font-size: 16px; margin: 18px 0 6px; }
-    .ad-help p, .ad-help li { font-size: 13.5px; color: var(--pb-muted); line-height: 1.7; }
-    .ad-help code { background: var(--pb-line); border-radius: 5px; padding: 1px 6px; font-size: 12px; }
-    .ad-json { width: 100%; min-height: 160px; font-family: monospace; font-size: 12px; border: 1px solid var(--pb-faint); border-radius: 9px; padding: 10px; color: var(--pb-ink); background: var(--pb-surface-2); }
+    #frame {
+      width: 100%; height: 100%; border: 1px solid var(--line); border-radius: 8px;
+      background: var(--ink); transition: width .3s, height .3s;
+    }
+    #frame.mobile { width: 390px; }
+    #frame.tablet { width: 820px; }
+
+    /* ---------- form bits ---------- */
+    .group { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+    .group > summary {
+      list-style: none; cursor: pointer; padding: 12px 14px; background: var(--panel-2);
+      font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bone);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .group > summary::-webkit-details-marker { display: none; }
+    .group > summary::before { content: '▸'; color: var(--brass); transition: transform .2s; }
+    .group[open] > summary::before { transform: rotate(90deg); }
+    .group .inner { padding: 14px; }
+    .fld { margin-bottom: 13px; }
+    .fld:last-child { margin-bottom: 0; }
+    .fld label { display: block; font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 5px; letter-spacing: .04em; }
+    .fld .hint { font-size: 10.5px; color: var(--faint); margin-top: 4px; line-height: 1.5; }
+    input[type=text], input[type=url], input[type=number], textarea, select {
+      width: 100%; background: var(--ink); border: 1px solid var(--line); border-radius: 8px;
+      padding: 9px 11px; color: var(--bone); font-family: var(--sans); font-size: 13px; outline: none;
+    }
+    textarea { min-height: 76px; resize: vertical; line-height: 1.6; }
+    input:focus, textarea:focus, select:focus { border-color: var(--brass); }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row-inline { display: flex; gap: 8px; align-items: center; }
+    .swatch { display: flex; align-items: center; gap: 9px; }
+    .swatch input[type=color] {
+      width: 38px; height: 34px; padding: 0; border: 1px solid var(--line);
+      border-radius: 7px; background: none; cursor: pointer; flex-shrink: 0;
+    }
+    .swatch input[type=text] { font-family: ui-monospace, monospace; font-size: 12px; }
+    input[type=range] { width: 100%; accent-color: var(--brass); }
+    .rng-val { font-size: 11px; color: var(--brass); font-family: ui-monospace, monospace; float: right; }
+    .tog { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; }
+    .tog span { font-size: 12.5px; color: var(--bone); }
+    .switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 999px; cursor: pointer; transition: .2s;
+    }
+    .slider::before {
+      content: ''; position: absolute; width: 15px; height: 15px; left: 3px; top: 2.5px;
+      background: var(--muted); border-radius: 50%; transition: .2s;
+    }
+    .switch input:checked + .slider { background: var(--brass); border-color: var(--brass); }
+    .switch input:checked + .slider::before { transform: translateX(17px); background: #17140f; }
+
+    .presets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .preset {
+      border: 1px solid var(--line); border-radius: 9px; padding: 9px; cursor: pointer;
+      background: var(--panel-2); text-align: left;
+    }
+    .preset:hover { border-color: var(--brass); }
+    .preset .dots { display: flex; gap: 4px; margin-bottom: 7px; }
+    .preset .dot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); }
+    .preset .nm { font-size: 11px; color: var(--bone); font-weight: 600; }
+
+    /* item cards (sections, list items, social) */
+    .item {
+      border: 1px solid var(--line); border-radius: 9px; margin-bottom: 10px; background: var(--panel-2);
+    }
+    .item-head {
+      display: flex; align-items: center; gap: 8px; padding: 9px 11px; cursor: pointer;
+    }
+    .item-head .t { flex: 1; font-size: 12.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .item-head .badge { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+    .icobtn {
+      border: 1px solid var(--line); background: var(--ink); color: var(--muted); cursor: pointer;
+      width: 26px; height: 26px; border-radius: 6px; font-size: 12px; line-height: 1; flex-shrink: 0;
+    }
+    .icobtn:hover { border-color: var(--brass); color: var(--brass); }
+    .item-body { padding: 0 11px 12px; display: none; }
+    .item.open .item-body { display: block; }
+    .off { opacity: .45; }
+
+    .icon-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+    .icon-grid button {
+      aspect-ratio: 1; border: 1px solid var(--line); background: var(--ink); border-radius: 7px;
+      cursor: pointer; color: var(--muted); display: flex; align-items: center; justify-content: center; padding: 5px;
+    }
+    .icon-grid button svg { width: 100%; height: 100%; fill: currentColor; }
+    .icon-grid button.on { border-color: var(--brass); color: var(--brass); background: #241d12; }
+    .icon-grid button.none { font-size: 10px; }
+
+    .note { font-size: 11.5px; color: var(--muted); line-height: 1.6; background: var(--panel-2); border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px; margin-bottom: 12px; }
+    .note b { color: var(--bone); }
+    .note.warn { border-color: #6b4d09; background: #241d0b; color: #f3d38a; }
+    #toasts { position: fixed; right: 16px; bottom: 16px; z-index: 90; display: flex; flex-direction: column; gap: 8px; }
+    .toast { background: var(--panel-2); border: 1px solid var(--line); border-radius: 9px; padding: 10px 15px; font-size: 12.5px; box-shadow: 0 10px 26px rgba(0,0,0,.6); max-width: 320px; }
+    .toast.err { border-color: var(--bad); color: #fecaca; }
+    .addbar { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+    @media (max-width: 700px) {
+      /* keep only the primary action up top — Download/Reset live in the Publish tab */
+      #btn-reset, #btn-export { display: none; }
+      .top { gap: 10px; padding: 0 10px; }
+      .top .logo { font-size: 16px; letter-spacing: .2em; }
+      #state-chip { display: none; }
+    }
+    @media (max-width: 1000px) {
+      .shell { flex-direction: column; }
+      .editor { width: 100%; height: 62%; border-right: 0; border-bottom: 1px solid var(--line); }
+      .preview-wrap { height: 38%; }
+      #frame.mobile, #frame.tablet { width: 100%; }
+      .devices { display: none; }
+    }
   </style>
-  <script src="config.js"></script>
 </head>
-<body class="pb-admin">
+<body>
 
-  <div class="ad-top">
-    <div class="logo">Site <span class="accent">Admin</span></div>
-    <div class="links">
-      <a class="tlink" href="/" target="_blank" rel="noopener">View site &#8599;</a>
-      <a class="tlink" id="ad-view-blog" href="#" target="_blank" rel="noopener" style="display:none">View blog &#8599;</a>
-      <span class="ad-chip" id="ad-auth-chip"><span class="dot"></span><span id="ad-auth-text">Not signed in</span></span>
-      <button class="ad-btn small" id="ad-signin-btn" type="button">Sign in with Google</button>
+  <div class="top">
+    <div class="logo">Cultrae</div>
+    <div class="sep"></div>
+    <span class="chip" id="state-chip">No changes</span>
+    <div class="grow"></div>
+    <div class="devices" id="devices">
+      <button data-w="full" class="on" type="button">Desktop</button>
+      <button data-w="tablet" type="button">Tablet</button>
+      <button data-w="mobile" type="button">Mobile</button>
+    </div>
+    <button class="btn" id="btn-reset" type="button">Reset</button>
+    <button class="btn" id="btn-export" type="button">Download</button>
+    <button class="btn primary" id="btn-apply" type="button">Apply to site</button>
+  </div>
+
+  <div class="shell">
+    <div class="editor">
+      <div class="tabs" id="tabs">
+        <button data-t="design" class="on" type="button">Design</button>
+        <button data-t="content" type="button">Content</button>
+        <button data-t="sections" type="button">Sections</button>
+        <button data-t="footer" type="button">Footer</button>
+        <button data-t="publish" type="button">Publish</button>
+      </div>
+      <div class="panes">
+        <div class="pane on" id="pane-design"></div>
+        <div class="pane" id="pane-content"></div>
+        <div class="pane" id="pane-sections"></div>
+        <div class="pane" id="pane-footer"></div>
+        <div class="pane" id="pane-publish"></div>
+      </div>
+    </div>
+
+    <div class="preview-wrap">
+      <iframe id="frame" src="index.html" title="Live preview"></iframe>
     </div>
   </div>
 
-  <div class="ad-shell">
-    <div class="ad-side" id="ad-tabs">
-      <button class="active" data-panel="dash" type="button">&#127968; Dashboard</button>
-      <button data-panel="settings" type="button">&#9881;&#65039; Site Settings</button>
-      <button data-panel="posts" type="button">&#128240; Posts</button>
-      <button data-panel="help" type="button">&#10067; Help</button>
-    </div>
+  <div id="toasts"></div>
 
-    <div class="ad-main">
-
-      <!-- ============ DASHBOARD ============ -->
-      <div class="ad-panel active" id="panel-dash">
-        <div id="ad-banners"></div>
-        <div class="ad-card">
-          <h2>Setup status</h2>
-          <p class="sub">Everything the admin page needs, checked live.</p>
-          <ul class="ad-status" id="ad-status"></ul>
-        </div>
-        <div class="ad-card">
-          <h2>Blogger shortcuts</h2>
-          <p class="sub">Writing full articles (with photo upload) is best done in Blogger&#8217;s own editor.</p>
-          <div class="ad-shortcuts" id="ad-shortcuts"></div>
-        </div>
-      </div>
-
-      <!-- ============ SITE SETTINGS ============ -->
-      <div class="ad-panel" id="panel-settings">
-        <div class="ad-card">
-          <h2>Branding</h2>
-          <p class="sub">The site name shown in the header and footer of the Vercel site.</p>
-          <div class="ad-cols">
-            <div class="ad-field"><label>Site name</label><input data-cfg="brand.title" type="text"/></div>
-            <div class="ad-field"><label>Tagline</label><input data-cfg="brand.tagline" type="text"/></div>
-            <div class="ad-field"><label>Logo image URL (optional — empty = text logo)</label><input data-cfg="brand.logo" type="text" placeholder="https://..."/></div>
-            <div class="ad-field"><label>Hero carousel label</label><input data-cfg="heroLabel" type="text" placeholder="Featured"/></div>
-          </div>
-        </div>
-
-        <div class="ad-card">
-          <h2>Menu</h2>
-          <p class="sub">Top navigation links. Category pages live on the blog: <code>&lt;blog address&gt;/search/label/&lt;Label&gt;</code>.</p>
-          <div class="ad-rows" id="rows-nav"></div>
-          <button class="ad-btn ghost small ad-add" data-add="nav" type="button">+ Add link</button>
-        </div>
-
-        <div class="ad-card">
-          <h2>Homepage rows</h2>
-          <p class="sub">Each row shows the 5 newest posts carrying that label. The label must exactly match the label on the Blogger posts.</p>
-          <div class="ad-rows" id="rows-sections"></div>
-          <button class="ad-btn ghost small ad-add" data-add="sections" type="button">+ Add row</button>
-        </div>
-
-        <div class="ad-card">
-          <h2>Quote banner</h2>
-          <p class="sub">The dark banner between the homepage rows. Leave the quote empty to hide it.</p>
-          <div class="ad-field"><label>Quote</label><textarea data-cfg="quote.text"></textarea></div>
-          <div class="ad-cols">
-            <div class="ad-field"><label>Name</label><input data-cfg="quote.name" type="text"/></div>
-            <div class="ad-field"><label>Role / description</label><input data-cfg="quote.role" type="text"/></div>
-          </div>
-          <div class="ad-field"><label>Portrait image URL (optional)</label><input data-cfg="quote.image" type="text" placeholder="https://..."/></div>
-        </div>
-
-        <div class="ad-card">
-          <h2>YouTube videos</h2>
-          <p class="sub">The video ID is the part after <code>v=</code> in a YouTube link. Remove all rows to hide the section.</p>
-          <div class="ad-rows" id="rows-videos"></div>
-          <button class="ad-btn ghost small ad-add" data-add="videos" type="button">+ Add video</button>
-        </div>
-
-        <div class="ad-card">
-          <h2>Footer</h2>
-          <div class="ad-cols">
-            <div class="ad-field"><label>Footer title (empty = site name)</label><input data-cfg="footer.title" type="text"/></div>
-            <div class="ad-field"><label>Email</label><input data-cfg="footer.contact.email" type="text"/></div>
-            <div class="ad-field"><label>Phone</label><input data-cfg="footer.contact.phone" type="text"/></div>
-            <div class="ad-field"><label>WhatsApp number (digits only, with country code)</label><input data-cfg="footer.contact.whatsapp" type="text" placeholder="9198xxxxxxxx"/></div>
-            <div class="ad-field"><label>Address (optional)</label><input data-cfg="footer.contact.address" type="text"/></div>
-          </div>
-          <div class="ad-field"><label>About text</label><textarea data-cfg="footer.about"></textarea></div>
-          <label style="font-size:12px;font-weight:600;color:var(--pb-muted);margin-bottom:5px;display:block">Social links</label>
-          <div class="ad-rows" id="rows-social"></div>
-          <button class="ad-btn ghost small ad-add" data-add="social" type="button">+ Add social link</button>
-          <div class="ad-cols" style="margin-top:16px">
-            <div class="ad-field"><label>Newsletter form URL (Google Form / Mailchimp — empty hides the box)</label><input data-cfg="footer.newsletter.action" type="text" placeholder="https://..."/></div>
-            <div class="ad-field"><label>Newsletter box title</label><input data-cfg="footer.newsletter.title" type="text"/></div>
-          </div>
-        </div>
-
-        <div class="ad-savebar">
-          <button class="ad-btn" id="ad-save-btn" type="button">Save to website</button>
-          <button class="ad-btn ghost" id="ad-copy-btn" type="button">Copy for manual paste</button>
-          <span class="note" id="ad-save-note">Changes go live on both sites within a minute or two.</span>
-        </div>
-        <div class="ad-card" id="ad-manual-card" style="display:none; margin-top:18px">
-          <h2>Manual paste</h2>
-          <p class="sub">Copied! In Blogger open <b>Pages &#8594; SITE-CONFIG</b> (create it with exactly that title if missing), switch the editor to <b>HTML view</b> (pencil icon &#8594; HTML view), select everything, paste, then <b>Publish/Update</b>.</p>
-          <textarea class="ad-json" id="ad-manual-json" readonly></textarea>
-        </div>
-      </div>
-
-      <!-- ============ POSTS ============ -->
-      <div class="ad-panel" id="panel-posts">
-        <div id="ad-posts-locked" class="ad-banner info">
-          Sign in with Google (top right) to manage posts here — or use the
-          <a href="https://www.blogger.com" target="_blank" rel="noopener"><b>Blogger dashboard</b></a> directly.
-        </div>
-        <div id="ad-posts-ui" style="display:none">
-          <div class="ad-card">
-            <h2>Quick post</h2>
-            <p class="sub">Good for short announcements. For long articles with several photos, use the Blogger editor (photo upload works there).</p>
-            <div class="ad-field"><label>Title</label><input id="np-title" type="text"/></div>
-            <div class="ad-field"><label>Labels (comma separated — these decide which homepage rows it appears in)</label><input id="np-labels" type="text" placeholder="News, Featured"/></div>
-            <div class="ad-field"><label>Main image URL (becomes the card thumbnail)</label><input id="np-image" type="text" placeholder="https://..."/></div>
-            <div class="ad-field"><label>Text</label><textarea id="np-body" style="min-height:140px"></textarea></div>
-            <div class="ad-actions">
-              <button class="ad-btn" id="np-publish" type="button">Publish</button>
-              <button class="ad-btn ghost" id="np-draft" type="button">Save as draft</button>
-            </div>
-            <div id="np-result" style="margin-top:10px;font-size:13px"></div>
-          </div>
-          <div class="ad-card">
-            <h2>Recent posts <button class="ad-btn ghost small" id="ad-posts-refresh" style="float:right" type="button">Refresh</button></h2>
-            <div style="overflow-x:auto">
-              <table class="ad-posts">
-                <thead><tr><th>Post</th><th>Labels</th><th style="width:210px">Actions</th></tr></thead>
-                <tbody id="ad-posts-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ HELP ============ -->
-      <div class="ad-panel" id="panel-help">
-        <div class="ad-card ad-help">
-          <h2>How this site works</h2>
-          <p>Articles live on the <b>Blogger blog</b>. The public website reads them automatically — no redeploys, ever.</p>
-          <h3>Where do I change things?</h3>
-          <ul>
-            <li><b>Write / edit articles</b> — Blogger editor (Dashboard tab &#8594; shortcuts), or Quick post here.</li>
-            <li><b>Homepage rows, videos, quote, footer, menu</b> — Site Settings tab, then Save.</li>
-            <li><b>Logo image &amp; blog menus</b> — Blogger &#8594; Layout.</li>
-            <li><b>Colors</b> — Blogger &#8594; Theme &#8594; Customize.</li>
-          </ul>
-          <h3>Labels are the magic</h3>
-          <p>A post labelled <code>News</code> appears in the Updates row; <code>Featured</code> puts it in the top carousel. One post can carry several labels. Every post needs at least one image — the first image becomes its thumbnail.</p>
-          <h3>Where do my settings get saved?</h3>
-          <p>Into a hidden page on the blog called <code>SITE-CONFIG</code>. Both the Vercel site and the blog read it when they load. Don&#8217;t delete that page, and never put passwords in it — it is technically public.</p>
-          <h3>Sign-in doesn&#8217;t work?</h3>
-          <p>The Google OAuth Client ID must be set in <code>config.js</code> and this page&#8217;s address must be listed as an authorized JavaScript origin in Google Cloud Console (SETUP.md has the exact steps). Only the Google account that owns the blog can actually save — other accounts get an error from Google.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div id="ad-toasts"></div>
-
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="admin.js"></script>
+  <script src="render.js"></script>
+  <script src="admin-cultrae.js"></script>
 </body>
 </html>

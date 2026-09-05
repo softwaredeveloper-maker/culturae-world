@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "title": "CULTRAE — Culture. Art. Expression.",
+    "description": "A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.",
+    "favicon": "◈",
+    "url": "https://culturae.world/"
+  },
+
+  "theme": {
+    "colors": {
+      "ink": "#0a0a0b",
+      "ink2": "#101012",
+      "ink3": "#16161a",
+      "line": "#262529",
+      "bone": "#ece7dd",
+      "muted": "#9a958c",
+      "faint": "#6a665f",
+      "accent": "#c9a06a",
+      "accentDim": "#8c6f45"
+    },
+    "fonts": {
+      "display": "Cormorant Garamond",
+      "body": "Inter",
+      "displayWeight": "300"
+    },
+    "scale": {
+      "heroSize": 176,
+      "heroSizeMin": 52,
+      "sectionSize": 68,
+      "bodySize": 16,
+      "lsHero": 0.12,
+      "lsMark": 0.42,
+      "lsNav": 0.22,
+      "lsSection": 0.1
+    },
+    "layout": {
+      "maxWidth": 1140,
+      "sectionPadding": 132,
+      "radius": 0,
+      "heroHeight": 100
+    },
+    "background": {
+      "image": "",
+      "overlay": 0.78,
+      "blur": 0,
+      "position": "center",
+      "size": "cover",
+      "fixed": true,
+      "glow": true,
+      "grain": false
+    },
+    "effects": {
+      "reveal": true,
+      "revealDistance": 26,
+      "speed": 900,
+      "dividers": true,
+      "headerBlur": true,
+      "hoverShift": true,
+      "pulse": true
+    }
+  },
+
+  "header": {
+    "showMark": true,
+    "mark": "CULTRAE",
+    "sticky": true
+  },
+
+  "hero": {
+    "enabled": true,
+    "title": "CULTRAE",
+    "tagline": "Culture. Art. Expression.",
+    "lede": "A cultural sanctuary dedicated to the exploration of contemporary art, collective memory, and the evolving nature of creative expression.",
+    "rule": true,
+    "scrollCue": "Scroll",
+    "align": "left",
+    "image": "",
+    "imageOverlay": 0.6
+  },
+
+  "sections": [
+    {
+      "id": "ethos",
+      "type": "prose",
+      "enabled": true,
+      "navLabel": "The Ethos",
+      "num": "Section 01",
+      "title": "The Ethos",
+      "standfirst": "Depth over Volume. Process over Outcome.",
+      "body": [
+        "Cultrae is a living cultural space. We work slowly. We listen carefully. We value depth over volume.",
+        "We curate artistic practices and conversations that reflect the rhythms of our time—rooted in history, yet open to experimentation. Our goal is to create a bridge between the artist and the observer, fostering a dialogue that extends beyond the ephemeral."
+      ]
+    },
+    {
+      "id": "projections",
+      "type": "list",
+      "enabled": true,
+      "navLabel": "Projections",
+      "num": "Section 02",
+      "title": "Projections",
+      "standfirst": "Looking forward. A roadmap of forthcoming cultural explorations and collaborative ventures.",
+      "items": [
+        {
+          "idx": "01",
+          "title": "Digital Ancestry",
+          "meta": "Autumn 2026",
+          "text": "An examination of digital media as an active archive for communal history and collective memory."
+        },
+        {
+          "idx": "02",
+          "title": "Sylvan Rhythms",
+          "meta": "Winter 2026",
+          "text": "A site-specific physical installation exploring soundscapes, natural acoustics, and environmental spatiality."
+        },
+        {
+          "idx": "03",
+          "title": "Monolithic Silence",
+          "meta": "Spring 2027",
+          "text": "A series of sculptural interventions exploring material memory and architectural stillness."
+        }
+      ]
+    },
+    {
+      "id": "currents",
+      "type": "current",
+      "enabled": true,
+      "navLabel": "Currents",
+      "num": "Section 03",
+      "title": "Currents",
+      "standfirst": "The immediate present. Active projects, recent findings, and current states of mind.",
+      "status": "In Session",
+      "itemTitle": "Ethereal Form",
+      "body": [
+        "Documenting the intersection of light and shadow in urban architecture. Preliminary visual research is now accessible in [The Archive](#archive)."
+      ],
+      "quoteLabel": "Journal Note",
+      "quote": "We notice a distinct shift toward the tactile—a collective desire for art that can be felt as deeply as it is seen."
+    },
+    {
+      "id": "archive",
+      "type": "grid",
+      "enabled": true,
+      "navLabel": "The Archive",
+      "num": "Section 04",
+      "title": "The Archive",
+      "tag": "Curated Vertical 2026",
+      "columns": 3,
+      "items": [
+        {
+          "idx": "Item 01",
+          "meta": "Visual Research",
+          "title": "Ethereal Form",
+          "text": "An exploration of light, shadow, and the human silhouette.",
+          "image": "",
+          "icon": ""
+        },
+        {
+          "idx": "Item 02",
+          "meta": "Archival Series",
+          "title": "Collective Memory",
+          "text": "Documenting the intersection of shared history and personal narrative.",
+          "image": "",
+          "icon": ""
+        },
+        {
+          "idx": "Item 03",
+          "meta": "Installation Study",
+          "title": "Spatial Rhythms",
+          "text": "Understanding how art occupies, alters, and transforms physical environments.",
+          "image": "",
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "id": "dialogue",
+      "type": "contact",
+      "enabled": true,
+      "navLabel": "Dialogue",
+      "num": "Section 05",
+      "title": "Dialogue",
+      "standfirst": "Begin the conversation. We are open to collaboration, inquiry, and quiet observation.",
+      "rows": [
+        { "icon": "phone", "label": "Phone", "value": "+91 9207761132", "href": "tel:+919207761132" },
+        { "icon": "mail", "label": "Email", "value": "info@culturae.world", "href": "mailto:info@culturae.world" }
+      ]
+    }
+  ],
+
+  "footer": {
+    "mark": "CULTRAE",
+    "tagline": "Culture • Art • Expression",
+    "copyright": "© {year} CULTRAE. All Rights Reserved.",
+    "showEmail": true,
+    "email": "info@culturae.world",
+    "social": []
+  }
+}
